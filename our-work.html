@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Work — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0D0D0D;
+    --red: #E8001C;
+    --white: #F8F5F0;
+    --light: #F0EFED;
+    --grey: #888888;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--body); overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* PAGE HERO */
+  .page-hero {
+    position: relative;
+    min-height: 62vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 6rem 3rem 3.5rem;
+    text-align: right;
+  }
+  .page-hero-slides { position: absolute; inset: 0; z-index: 0; }
+  .page-hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transform: scale(1.08);
+    transition: opacity 1.6s ease, transform 8s ease;
+  }
+  .page-hero-slide.active { opacity: 1; transform: scale(1); }
+  .page-hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.8) 65%, var(--black) 100%),
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(232,0,28,0.16) 0%, transparent 70%);
+  }
+  .page-hero-content {
+    position: relative; z-index: 2; max-width: 560px;
+    display: flex; flex-direction: column; align-items: flex-end;
+  }
+  .page-hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1.25rem;
+  }
+  .page-hero-eyebrow::after { content: ''; display: block; width: 28px; height: 2px; background: var(--red); }
+  .page-hero-title {
+    font-family: var(--display); font-size: clamp(3rem, 6vw, 5.2rem);
+    line-height: 0.98; letter-spacing: -0.01em; color: var(--white);
+  }
+  .page-hero-title em { font-style: normal; color: var(--red); }
+  .page-hero-dots {
+    position: absolute; bottom: 1.75rem; right: 2rem; z-index: 2;
+    display: flex; gap: 0.6rem;
+  }
+  .page-hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(248,245,240,0.3); transition: background 0.3s, transform 0.3s; }
+  .page-hero-dot.active { background: var(--red); transform: scale(1.3); }
+
+  /* Breadcrumb bar */
+  .breadcrumb-bar {
+    background: var(--red); padding: 0.65rem 3rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(248,245,240,0.8);
+  }
+  .breadcrumb-bar a { color: rgba(248,245,240,0.65); text-decoration: none; }
+  .breadcrumb-bar a:hover { color: var(--white); }
+  .breadcrumb-bar span { color: rgba(248,245,240,0.4); }
+
+  /* OUR WORK GRID */
+  .our-work {
+    background: var(--white);
+    padding: 5rem 3rem 6rem;
+  }
+  .work-grid {
+    max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2.75rem 1.75rem;
+  }
+  .work-item { text-decoration: none; color: inherit; }
+  .work-thumb {
+    position: relative;
+    aspect-ratio: 3 / 3.1;
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--light);
+  }
+  .work-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .work-item:hover .work-thumb img { transform: scale(1.05); }
+  .work-caption {
+    position: relative;
+    margin: 0 1.1rem;
+    margin-top: -2.6rem;
+    background: var(--white);
+    box-shadow: 0 10px 26px -12px rgba(13,13,13,0.28);
+    padding: 1.1rem 1.3rem 1.3rem;
+    text-align: center;
+  }
+  .work-client {
+    display: block;
+    font-weight: 700;
+    font-size: 0.86rem;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #2451CC;
+    margin-bottom: 0.4rem;
+    line-height: 1.25;
+  }
+  .work-item:first-child .work-client { color: var(--red); }
+  .work-service {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 980px) {
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .work-grid { grid-template-columns: 1fr; }
+    .page-hero, .our-work, .breadcrumb-bar { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+
+  /* ==== UNIFIED SITE NAV + FOOTER (oxnav / oxfoot) ==== */
+  .oxnav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px clamp(20px,4vw,56px);background:rgba(251,247,241,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,16,15,.1);font-family:'Inter',sans-serif;box-shadow:0 2px 18px rgba(20,16,15,.05);}
+  .oxnav-brand{display:flex;align-items:center;text-decoration:none;flex:0 0 auto;}
+  .oxnav-word{font-weight:800;font-size:1rem;letter-spacing:.02em;color:#14100F;text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif;}
+  .oxnav-word em{font-style:normal;color:#E8283B;}
+  .oxnav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);flex-wrap:nowrap;}
+  .oxnav-links a{position:relative;font-size:.79rem;font-weight:600;letter-spacing:.01em;color:#14100F;text-decoration:none;opacity:.7;padding:6px 1px;transition:opacity .2s;white-space:nowrap;font-family:'Inter',sans-serif;}
+  .oxnav-links a:hover{opacity:1;}
+  .oxnav-links a.oxnav-active{opacity:1;}
+  .oxnav-links a.oxnav-active::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#E8283B;}
+  .oxnav-right{display:flex;align-items:center;gap:14px;flex:0 0 auto;}
+  .oxnav-social{display:flex;gap:9px;}
+  .oxnav-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+  .oxnav-social a svg{width:12px;height:12px;display:block;}
+  .oxnav-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+  .oxnav-toggle{display:none;background:none;border:none;cursor:pointer;width:28px;height:18px;flex-direction:column;justify-content:space-between;padding:0;flex:0 0 auto;z-index:2;}
+  .oxnav-toggle span{display:block;height:2px;background:#14100F;border-radius:2px;}
+  @media (max-width:980px){
+    .oxnav-links{position:absolute;top:100%;left:0;right:0;background:#FBF7F1;flex-direction:column;align-items:flex-start;gap:0;border-bottom:1px solid rgba(20,16,15,.1);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .oxnav-links.is-open{max-height:520px;}
+    .oxnav-links a{width:100%;padding:14px clamp(20px,4vw,56px);border-bottom:1px solid rgba(20,16,15,.06);box-sizing:border-box;}
+    .oxnav-links a.oxnav-active::after{display:none;}
+    .oxnav-links a.oxnav-active{color:#E8283B;}
+    .oxnav-right .oxnav-social{display:none;}
+    .oxnav-toggle{display:flex;}
+  }
+
+  .oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:26px clamp(20px,4vw,56px);text-align:center;border-top:1px solid rgba(20,16,15,.08);}
+  .oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
+  .oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
+  .oxfoot-bottom a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header class="oxnav">
+  <a href="index.html" class="oxnav-brand">
+    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+  </a>
+  <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html">Who We Are</a>
+    <a href="services.html">Our Services</a>
+    <a href="media-buying.html">Media Buying</a>
+    <a href="our-work.html" class="oxnav-active">Our Work</a>
+    <a href="us-onboard.html">Us Onboard</a>
+    <a href="brand-portfolio.html">Brand Portfolio</a>
+    <a href="pr-films.html">Pr and Films</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div class="oxnav-right">
+    <div class="oxnav-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
+  <button class="oxnav-toggle" id="oxnavToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<script>
+(function(){
+  var t=document.getElementById('oxnavToggle'), l=document.getElementById('oxnavLinks');
+  if(t&&l){
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('is-open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){ l.classList.remove('is-open'); t.setAttribute('aria-expanded','false'); });
+    });
+  }
+})();
+</script>
+
+<section class="page-hero">
+  <div class="page-hero-slides" id="page-hero-slides">
+    <div class="page-hero-slide active" style="background-image:url('assets/images/webp/billboard.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/event-management.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/media-buying.webp')"></div>
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Our Work</div>
+    <h1 class="page-hero-title">Some of our recent <em>Work</em></h1>
+  </div>
+  <div class="page-hero-dots" id="page-hero-dots"></div>
+</section>
+<div class="breadcrumb-bar">
+  <a href="index.html">Home</a>
+  <span>&rsaquo;</span>
+  <span style="color:rgba(248,245,240,0.9)">Our Work</span>
+</div>
+
+<!-- OUR WORK GRID -->
+<section class="our-work">
+  <div class="work-grid">
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/1.jpg" alt="AUDA-NEPAD" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">AUDA-NEPAD</span>
+        <span class="work-service">Content Production</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/2.jpg" alt="Distell" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Distell</span>
+        <span class="work-service">QR Code Competition</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/3.jpg" alt="Business Report" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Business Report</span>
+        <span class="work-service">Events Management</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/4.jpg" alt="The African Development Bank" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">The African Development Bank</span>
+        <span class="work-service">Media Buying Strategy</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/5.jpg" alt="Cricket SA – Mzansi Super League" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Cricket SA – Mzansi Super League</span>
+        <span class="work-service">Print Media Execution</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/6.jpg" alt="SA National Editors' Forum" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">SA National Editors' Forum</span>
+        <span class="work-service">2018 Nat Nakasa Awards</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/7.jpg" alt="Institute for the Advancement of Journalism" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Institute for the Advancement of Journalism</span>
+        <span class="work-service">Re-design Corporate ID</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/8.jpg" alt="The South African National AIDS Council" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">The South African National AIDS Council</span>
+        <span class="work-service">Media Buying Strategy</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/9.jpg" alt="Independent Media" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Independent Media</span>
+        <span class="work-service">Advertising &amp; Sponsorship Sales</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/10.jpg" alt="Tiso Blackstar (currently Arena Holdings)" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Tiso Blackstar (currently Arena Holdings)</span>
+        <span class="work-service">Editorial Concepts</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/11.jpg" alt="The Other Foundation" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">The Other Foundation</span>
+        <span class="work-service">Event Managment</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/12.jpg" alt="The Perfect Hair" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">The Perfect Hair</span>
+        <span class="work-service">Brand Activation</span>
+      </div>
+    </a>
+
+    <a href="#" class="work-item reveal">
+      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/13.jpg" alt="Richards Bay Minerals" loading="lazy"></div>
+      <div class="work-caption">
+        <span class="work-client">Richards Bay Minerals</span>
+        <span class="work-service">Media Campaign</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer class="oxfoot">
+  <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = ((Array.from(revealEls).indexOf(e.target) % 4) * 0.08) + 's';
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  const pgSlides = document.querySelectorAll('.page-hero-slide');
+  const pgDotsWrap = document.getElementById('page-hero-dots');
+  pgSlides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'page-hero-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => pgGoTo(i));
+    pgDotsWrap.appendChild(dot);
+  });
+  const pgDots = document.querySelectorAll('.page-hero-dot');
+  let pgCurrent = 0;
+  function pgGoTo(i) {
+    pgSlides[pgCurrent].classList.remove('active');
+    pgDots[pgCurrent].classList.remove('active');
+    pgCurrent = i;
+    pgSlides[pgCurrent].classList.add('active');
+    pgDots[pgCurrent].classList.add('active');
+  }
+  setInterval(() => { pgGoTo((pgCurrent + 1) % pgSlides.length); }, 5000);
+</script>
+</body>
+</html>

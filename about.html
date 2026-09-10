@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Who We Are — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0D0D0D;
+    --red: #E8001C;
+    --white: #F8F5F0;
+    --light: #F0EFED;
+    --grey: #888888;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--body); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: transparent;
+    padding: 1.1rem 3rem;
+    background: #FFFFFF;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+  .nav-logo { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(13,13,13,0.7); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--red); }
+  .nav-social { display: flex; gap: 0.7rem; }
+  .nav-social a { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--black); color: var(--white); text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .nav-social a svg { width: 15px; height: 15px; display: block; }
+  .nav-social a:hover { background: var(--red); transform: translateY(-2px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    position: relative;
+    min-height: 62vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 6rem 3rem 3.5rem;
+    text-align: right;
+  }
+  .page-hero-slides { position: absolute; inset: 0; z-index: 0; }
+  .page-hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transform: scale(1.08);
+    transition: opacity 1.6s ease, transform 8s ease;
+  }
+  .page-hero-slide.active { opacity: 1; transform: scale(1); }
+  .page-hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.8) 65%, var(--black) 100%),
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(232,0,28,0.16) 0%, transparent 70%);
+  }
+  .page-hero-content {
+    position: relative; z-index: 2; max-width: 560px;
+    display: flex; flex-direction: column; align-items: flex-end;
+  }
+  .page-hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1.25rem;
+  }
+  .page-hero-eyebrow::after { content: ''; display: block; width: 28px; height: 2px; background: var(--red); }
+  .page-hero-title {
+    font-family: var(--display); font-size: clamp(3rem, 6vw, 5.2rem);
+    line-height: 0.98; letter-spacing: -0.01em; color: var(--white);
+  }
+  .page-hero-title em { font-style: normal; color: var(--red); }
+  .page-hero-dots {
+    position: absolute; bottom: 1.75rem; right: 2rem; z-index: 2;
+    display: flex; gap: 0.6rem;
+  }
+  .page-hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(248,245,240,0.3); transition: background 0.3s, transform 0.3s; }
+  .page-hero-dot.active { background: var(--red); transform: scale(1.3); }
+
+  /* Breadcrumb bar */
+  .breadcrumb-bar {
+    background: var(--red); padding: 0.65rem 3rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(248,245,240,0.8);
+  }
+  .breadcrumb-bar a { color: rgba(248,245,240,0.65); text-decoration: none; }
+  .breadcrumb-bar a:hover { color: var(--white); }
+  .breadcrumb-bar span { color: rgba(248,245,240,0.4); }
+
+  /* ── WHO WE ARE ── */
+  .who {
+    background: var(--white); padding: 6rem 3rem;
+  }
+  .who-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: start;
+  }
+  .section-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1rem;
+  }
+  .who-title {
+    font-family: var(--display); font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--black); margin-bottom: 1.75rem;
+  }
+  .who-body { font-size: 1rem; color: #444; line-height: 1.85; margin-bottom: 1.25rem; }
+  .who-body strong { color: var(--red); font-weight: 600; }
+
+  .channel-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; border-top: 1px solid #e0e0e0; }
+  .channel-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9rem; font-weight: 500; color: var(--black);
+    transition: color 0.2s;
+  }
+  .channel-item:hover { color: var(--red); }
+  .channel-item .ch-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--light); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; transition: background 0.2s;
+  }
+  .channel-item:hover .ch-icon { background: var(--red); }
+
+  /* Stat stack */
+  .stat-stack { display: flex; flex-direction: column; gap: 0; }
+  .stat-block {
+    padding: 2.5rem 2rem; border-bottom: 1px solid #e0e0e0;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .stat-block:first-child { border-top: 1px solid #e0e0e0; }
+  .stat-big { font-family: var(--display); font-size: 4.5rem; color: var(--red); line-height: 1; }
+  .stat-desc { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
+
+  /* ── MEDIA BUYING DARK ── */
+  .media-buying {
+    background: var(--black); color: var(--white); padding: 6rem 3rem;
+  }
+  .media-buying-inner { max-width: 1200px; margin: 0 auto; }
+  .media-buying-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-bottom: 4rem; align-items: end;
+  }
+  .media-buying-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--white);
+  }
+  .media-buying-intro { font-size: 0.95rem; color: var(--grey); line-height: 1.8; }
+
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #1a1a1a; }
+  .pillar-card {
+    background: #111; padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .pillar-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--red);
+    transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s;
+  }
+  .pillar-card:hover { background: #161616; }
+  .pillar-card:hover::after { transform: scaleY(1); }
+  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .pillar-name { font-family: var(--display); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.75rem; }
+  .pillar-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.75; }
+
+  /* ── CAMPAIGNS ── */
+  .campaigns { background: var(--light); padding: 6rem 3rem; }
+  .campaigns-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .campaigns-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.0; color: var(--black); margin-bottom: 1.25rem;
+  }
+  .campaigns-body { font-size: 0.95rem; color: #555; line-height: 1.85; margin-bottom: 2rem; }
+  .outcome-list { display: flex; flex-direction: column; gap: 1rem; }
+  .outcome-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem 1.5rem; background: var(--white);
+    border-left: 3px solid var(--red);
+  }
+  .outcome-item .oi-label { font-size: 0.9rem; font-weight: 600; color: var(--black); }
+  .outcome-item .oi-sub { font-size: 0.8rem; color: #777; margin-top: 0.2rem; }
+
+  /* Visual impact cards */
+  .channels-visual { display: flex; flex-direction: column; gap: 2px; }
+  .ch-visual-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .ch-visual-card {
+    background: var(--black); padding: 2rem 1.75rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    cursor: default; transition: background 0.25s;
+    min-height: 130px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .ch-visual-card.full { grid-column: 1 / -1; }
+  .ch-visual-card:hover { background: var(--red); }
+  .ch-visual-emoji { font-size: 2rem; position: absolute; top: 1.25rem; left: 1.75rem; }
+  .ch-visual-name {
+    font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.04em;
+    color: var(--white); line-height: 1;
+  }
+
+  /* ── REACH ── */
+  .reach { background: var(--white); padding: 6rem 3rem; }
+  .reach-inner { max-width: 1200px; margin: 0 auto; }
+  .reach-header { margin-bottom: 4rem; }
+  .reach-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--black); max-width: 700px;
+  }
+  .reach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #e0e0e0; }
+  .reach-card {
+    background: var(--white); padding: 2.5rem 2rem;
+    text-align: center; transition: background 0.25s;
+  }
+  .reach-card:hover { background: var(--red); }
+  .reach-card:hover .reach-num, .reach-card:hover .reach-label { color: var(--white); }
+  .reach-num { font-family: var(--display); font-size: 3.2rem; color: var(--red); transition: color 0.25s; }
+  .reach-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #666; margin-top: 0.4rem; transition: color 0.25s; }
+
+  /* ── SERVICES ORBIT (redesigned as card grid) ── */
+  .services-section { background: var(--black); padding: 6rem 3rem; }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-header-row {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .services-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--white);
+  }
+  .services-intro-text { font-size: 0.9rem; color: var(--grey); max-width: 340px; line-height: 1.75; }
+
+  .orbit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #222; }
+  .orbit-card {
+    background: #111; padding: 2.5rem 2rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    cursor: default; transition: background 0.25s; position: relative;
+  }
+  .orbit-card.featured { background: var(--red); }
+  .orbit-card:not(.featured):hover { background: #1c1c1c; }
+  .orbit-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 2px; background: var(--red);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .orbit-card:not(.featured):hover::before { transform: scaleX(1); }
+  .orbit-icon { font-size: 1.6rem; }
+  .orbit-name { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.04em; color: var(--white); }
+  .orbit-card.featured .orbit-name { color: var(--white); }
+
+  /* ── CLIENTS ── */
+  .clients { background: var(--light); padding: 6rem 3rem; }
+  .clients-inner { max-width: 1200px; margin: 0 auto; }
+  .clients-header { margin-bottom: 3rem; }
+  .clients-tagline {
+    font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.5rem);
+    line-height: 1.05; color: var(--black); max-width: 800px; margin-bottom: 0.75rem;
+  }
+  .clients-sub { font-size: 0.9rem; color: #666; max-width: 520px; line-height: 1.75; }
+
+  .clients-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 2px; background: #d8d8d8;
+  }
+  .client-cell {
+    background: var(--white); padding: 2rem 1.5rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; text-align: center; transition: background 0.2s;
+    min-height: 110px;
+  }
+  .client-cell:hover { background: var(--black); }
+  .client-cell:hover .client-name { color: var(--white); }
+  .client-name {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #444; transition: color 0.2s;
+  }
+  .client-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--red); padding: 6rem 3rem; overflow: hidden; position: relative;
+  }
+  .cta-banner::before {
+    content: 'UNMISSABLE'; font-family: var(--display); font-size: 16rem; color: rgba(0,0,0,0.12);
+    position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+    white-space: nowrap; pointer-events: none; line-height: 1;
+  }
+  .cta-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 3rem; position: relative; z-index: 1; }
+  .cta-text { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 5rem); color: var(--white); line-height: 1.0; }
+  .btn-cta {
+    flex-shrink: 0; display: inline-block; padding: 1.2rem 2.8rem;
+    background: var(--black); color: var(--white);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; border: 2px solid var(--black);
+    transition: background 0.25s, color 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-cta:hover { background: transparent; color: var(--black); border-color: rgba(0,0,0,0.4); }
+
+  /* ── FOOTER (cream) ── */
+  footer { background: var(--white); padding: 3.5rem 3rem 2rem; border-top: 1px solid rgba(13,13,13,0.08); text-align: center; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-logo { display: inline-block; font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; margin-bottom: 1.75rem; }
+  .footer-logo span { color: var(--red); }
+  .footer-meta { display: flex; align-items: center; justify-content: center; gap: 1.6rem; flex-wrap: wrap; font-size: 0.85rem; font-weight: 600; color: var(--black); margin-bottom: 1.5rem; }
+  .footer-meta .hours { color: var(--red); }
+  .footer-nav { display: flex; justify-content: center; gap: clamp(14px,2.4vw,26px); flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-nav a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); opacity: 0.72; text-decoration: none; transition: opacity 0.2s, color 0.2s; }
+  .footer-nav a:hover { opacity: 1; color: var(--red); }
+  .footer-copy { font-size: 0.75rem; color: var(--grey); letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+  .footer-social { display: flex; gap: 1rem; justify-content: center; }
+  .footer-social a { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(13,13,13,0.15); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--black); text-decoration: none; transition: all 0.2s; }
+  .footer-social a:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+  .footer-copy { font-size: 0.75rem; color: rgba(248,245,240,0.3); letter-spacing: 0.06em; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .footer-social a { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(248,245,240,0.15); color: rgba(248,245,240,0.5); text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+  .footer-social a svg { width: 14px; height: 14px; display: block; }
+  .footer-social a:hover { color: var(--red); border-color: var(--red); }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero, .who, .media-buying, .campaigns, .reach, .services-section, .clients, .cta-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .breadcrumb-bar { padding: 0.65rem 1.5rem; }
+    .who-inner, .media-buying-header, .campaigns-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .reach-grid { grid-template-columns: repeat(2, 1fr); }
+    .orbit-grid { grid-template-columns: repeat(2, 1fr); }
+    .clients-strip { grid-template-columns: repeat(3, 1fr); }
+    .cta-inner { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* ── ABOUT PAGE ADDITIONS ── */
+  .who-photo { width: 100%; border-radius: 4px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.18); }
+  .who-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .section-heading-center { text-align: center; max-width: 900px; margin: 0 auto 3.5rem; }
+  .section-heading-center .section-label { justify-content: center; display: flex; }
+  .section-heading-center h2 { font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.2rem); color: var(--black); line-height: 1.05; }
+
+  /* Value grid: Expert Media Buying / Maximum Value */
+  .value-grid {
+    max-width: 1200px; margin: 4rem auto 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    border-top: 1px solid #e0e0e0; padding-top: 3.5rem;
+  }
+  .value-col h3 { font-family: var(--display); font-size: 1.7rem; letter-spacing: 0.02em; color: var(--black); margin-bottom: 1.25rem; }
+  .value-col p.lead { font-size: 0.9rem; color: #555; margin-bottom: 1.25rem; }
+  .value-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .value-list li { font-size: 0.92rem; color: #333; padding-left: 1.4rem; position: relative; line-height: 1.6; }
+  .value-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; background: var(--red); border-radius: 50%; }
+
+  .channel-icon-row { display: flex; gap: 2.25rem; flex-wrap: wrap; margin: 0.5rem 0 1.5rem; }
+  .channel-icon { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+  .channel-icon .ci-badge {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--light); color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; transition: background 0.2s, color 0.2s;
+  }
+  .channel-icon:hover .ci-badge { background: var(--red); color: var(--white); }
+  .channel-icon span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #444; }
+  .discount-line { font-size: 0.95rem; color: var(--black); font-weight: 500; }
+  .discount-line strong { color: var(--red); }
+
+  /* Visual impact photo cards */
+  .visual-impact-title { font-family: var(--display); font-size: 1.8rem; text-align: center; color: var(--black); margin: 4.5rem 0 2rem; }
+  .visual-impact-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .vi-card {
+    position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
+    background: var(--red);
+  }
+  .vi-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; transition: opacity 0.25s, transform 0.3s; }
+  .vi-card:hover img { opacity: 0.35; transform: scale(1.05); }
+  .vi-card .vi-label {
+    position: absolute; left: 0; right: 0; bottom: 0.9rem; text-align: center;
+    font-family: var(--display); font-size: 1.15rem; letter-spacing: 0.03em; color: var(--white);
+  }
+
+  .cta-sub { position: relative; z-index: 1; font-size: 0.95rem; color: rgba(255,255,255,0.85); max-width: 640px; margin: 1rem auto 0; text-align: center; }
+  .cta-inner.stacked { flex-direction: column; text-align: center; gap: 1rem; }
+
+  .clients-offering { font-size: 0.9rem; color: #666; text-align: center; max-width: 640px; margin: 0 auto 3rem; line-height: 1.7; }
+
+  @media (max-width: 960px) {
+    .value-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .visual-impact-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+</style>
+<style>
+
+/* ==== UNIFIED SITE NAV + FOOTER (oxnav / oxfoot) ==== */
+.oxnav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px clamp(20px,4vw,56px);background:rgba(251,247,241,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,16,15,.1);font-family:'Inter',sans-serif;box-shadow:0 2px 18px rgba(20,16,15,.05);}
+.oxnav-brand{display:flex;align-items:center;text-decoration:none;flex:0 0 auto;}
+.oxnav-word{font-weight:800;font-size:1rem;letter-spacing:.02em;color:#14100F;text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif;}
+.oxnav-word em{font-style:normal;color:#E8283B;}
+.oxnav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);flex-wrap:nowrap;}
+.oxnav-links a{position:relative;font-size:.79rem;font-weight:600;letter-spacing:.01em;color:#14100F;text-decoration:none;opacity:.7;padding:6px 1px;transition:opacity .2s;white-space:nowrap;font-family:'Inter',sans-serif;}
+.oxnav-links a:hover{opacity:1;}
+.oxnav-links a.oxnav-active{opacity:1;}
+.oxnav-links a.oxnav-active::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#E8283B;}
+.oxnav-right{display:flex;align-items:center;gap:14px;flex:0 0 auto;}
+.oxnav-social{display:flex;gap:9px;}
+.oxnav-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+.oxnav-social a svg{width:12px;height:12px;display:block;}
+.oxnav-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+.oxnav-toggle{display:none;background:none;border:none;cursor:pointer;width:28px;height:18px;flex-direction:column;justify-content:space-between;padding:0;flex:0 0 auto;z-index:2;}
+.oxnav-toggle span{display:block;height:2px;background:#14100F;border-radius:2px;}
+@media (max-width:980px){
+  .oxnav-links{position:absolute;top:100%;left:0;right:0;background:#FBF7F1;flex-direction:column;align-items:flex-start;gap:0;border-bottom:1px solid rgba(20,16,15,.1);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .oxnav-links.is-open{max-height:520px;}
+  .oxnav-links a{width:100%;padding:14px clamp(20px,4vw,56px);border-bottom:1px solid rgba(20,16,15,.06);box-sizing:border-box;}
+  .oxnav-links a.oxnav-active::after{display:none;}
+  .oxnav-links a.oxnav-active{color:#E8283B;}
+  .oxnav-right .oxnav-social{display:none;}
+  .oxnav-toggle{display:flex;}
+}
+
+.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:26px clamp(20px,4vw,56px);text-align:center;border-top:1px solid rgba(20,16,15,.08);}
+.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
+.oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
+.oxfoot-bottom a:hover{text-decoration:underline;}
+
+</style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<header class="oxnav">
+  <a href="index.html" class="oxnav-brand">
+    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+  </a>
+  <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="oxnav-active">Who We Are</a>
+    <a href="services.html">Our Services</a>
+    <a href="media-buying.html">Media Buying</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="us-onboard.html">Us Onboard</a>
+    <a href="brand-portfolio.html">Brand Portfolio</a>
+    <a href="pr-films.html">Pr and Films</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div class="oxnav-right">
+    <div class="oxnav-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
+  <button class="oxnav-toggle" id="oxnavToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<script>
+(function(){
+  var t=document.getElementById('oxnavToggle'), l=document.getElementById('oxnavLinks');
+  if(t&&l){
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('is-open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){ l.classList.remove('is-open'); t.setAttribute('aria-expanded','false'); });
+    });
+  }
+})();
+</script>
+
+<section class="page-hero">
+  <div class="page-hero-slides" id="page-hero-slides">
+    <div class="page-hero-slide active" style="background-image:url('assets/images/webp/about-1.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/about-2.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/media-approach.webp')"></div>
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">About Us</div>
+    <h1 class="page-hero-title">Who <em>We Are</em></h1>
+  </div>
+  <div class="page-hero-dots" id="page-hero-dots"></div>
+</section>
+<div class="breadcrumb-bar">
+  <a href="index.html">Home</a>
+  <span>&rsaquo;</span>
+  <span style="color:rgba(248,245,240,0.9)">Who We Are</span>
+</div>
+
+<!-- WHO WE ARE -->
+<section class="who">
+  <div class="section-heading-center reveal">
+    <div class="section-label">Who We Are</div>
+    <h2>Breathing Life Into Every Brand We Touch</h2>
+  </div>
+  <div class="who-inner">
+    <div class="reveal">
+      <p class="who-body">
+        <strong>Oxygen Media</strong> is South Africa's premier media buying and advertising agency, known for crafting <strong>innovative, high-impact media solutions</strong> across every platform that matters.
+      </p>
+
+      <div class="channel-list">
+        <div class="channel-item"><div class="ch-icon">&#128246;</div> All commercial &amp; community radio stations</div>
+        <div class="channel-item"><div class="ch-icon">&#128240;</div> Print media that still packs a punch</div>
+        <div class="channel-item"><div class="ch-icon">&#127961;</div> Outdoor billboards that grab attention</div>
+        <div class="channel-item"><div class="ch-icon">&#128250;</div> Television advertising that tells your story</div>
+        <div class="channel-item"><div class="ch-icon">&#127760;</div> Digital platforms for the modern audience</div>
+      </div>
+    </div>
+
+    <div class="reveal who-photo" style="transition-delay:0.15s">
+      <img src="assets/images/webp/about-1.webp" alt="Media strategy and advertising planning" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="value-grid">
+    <div class="value-col reveal">
+      <h3>Expert Media Buying</h3>
+      <p class="lead">Our strategists custom-build campaigns that:</p>
+      <ul class="value-list">
+        <li>Laser-focus on your core audience</li>
+        <li>Maximize ROI across multiple channels</li>
+        <li>Blend traditional and digital for unified impact</li>
+      </ul>
+    </div>
+    <div class="value-col reveal" style="transition-delay:0.1s">
+      <h3>Maximum Value</h3>
+      <p class="lead">We negotiate the <strong style="color:var(--red)">best deals</strong> for:</p>
+      <div class="channel-icon-row">
+        <div class="channel-icon"><div class="ci-badge">&#128246;</div><span>Radio</span></div>
+        <div class="channel-icon"><div class="ci-badge">&#128250;</div><span>TV</span></div>
+        <div class="channel-icon"><div class="ci-badge">&#128240;</div><span>Print</span></div>
+        <div class="channel-icon"><div class="ci-badge">&#127961;</div><span>Outdoor</span></div>
+        <div class="channel-icon"><div class="ci-badge">&#127760;</div><span>Digital</span></div>
+      </div>
+      <p class="discount-line">All discounts? <strong>Passed straight to you.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGNS THAT DELIVER -->
+<section class="campaigns">
+  <div class="campaigns-inner">
+    <div class="reveal">
+      <div class="section-label">Campaigns That Deliver</div>
+      <h2 class="campaigns-title">We're Not Just Placing Ads &mdash; We're Moving Markets</h2>
+      <p class="campaigns-body">Our campaigns:</p>
+      <div class="outcome-list">
+        <div class="outcome-item"><div class="oi-label">Sell products</div></div>
+        <div class="outcome-item"><div class="oi-label">Build brand love</div></div>
+        <div class="outcome-item"><div class="oi-label">Drive attitudinal and behavioral change</div></div>
+      </div>
+    </div>
+
+    <div class="reveal who-photo" style="transition-delay:0.15s">
+      <img src="assets/images/webp/about-2.webp" alt="Team reviewing a campaign" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- NATIONAL REACH -->
+<section class="reach">
+  <div class="reach-inner">
+    <div class="reach-header reveal">
+      <div class="section-label">National Reach &amp; Local Expertise</div>
+      <h2 class="reach-title">Access to Every Major Media Platform in South Africa</h2>
+      <div class="channel-list" style="max-width:640px;margin-top:2rem">
+        <div class="channel-item"><div class="ch-icon">&#9989;</div> Access to all major media platforms</div>
+        <div class="channel-item"><div class="ch-icon">&#9989;</div> Unbeatable rates &amp; industry connections</div>
+        <div class="channel-item"><div class="ch-icon">&#9989;</div> Over 6,000 listings with lightning-fast booking</div>
+      </div>
+    </div>
+
+    <h3 class="visual-impact-title reveal">Visual Impact</h3>
+    <div class="visual-impact-grid reveal" style="transition-delay:0.1s">
+      <div class="vi-card">
+        <img src="assets/images/webp/radio.webp" alt="Radio" loading="lazy" />
+        <div class="vi-label">Radio</div>
+      </div>
+      <div class="vi-card">
+        <img src="assets/images/webp/newspaper.webp" alt="Newspaper" loading="lazy" />
+        <div class="vi-label">Newspaper</div>
+      </div>
+      <div class="vi-card">
+        <img src="assets/images/webp/tv.webp" alt="TV" loading="lazy" />
+        <div class="vi-label">TV</div>
+      </div>
+      <div class="vi-card">
+        <img src="assets/images/webp/billboard.webp" alt="Billboards" loading="lazy" />
+        <div class="vi-label">Billboards</div>
+      </div>
+      <div class="vi-card">
+        <img src="assets/images/webp/magazine.webp" alt="Magazine" loading="lazy" />
+        <div class="vi-label">Magazine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner stacked">
+    <div class="cta-text reveal">Let's Make Your<br/>Brand Unmissable</div>
+    <p class="cta-sub reveal">Ready to dominate your space? <strong>Let Oxygen Media be your unfair advantage.</strong></p>
+  </div>
+</section>
+
+<!-- SERVICES OFFERING INTRO -->
+<section class="clients" style="padding-bottom:2rem">
+  <div class="clients-inner">
+    <div class="clients-header reveal" style="text-align:center;margin:0 auto 1rem;max-width:800px">
+      <h2 class="clients-tagline" style="margin:0 auto">Our services are designed to support clients to achieve their strategic goals.</h2>
+    </div>
+    <p class="clients-offering reveal">Our offering includes: brand campaigns, media strategy, web design, event management, content production and media buying.</p>
+    <div class="clients-strip reveal" style="transition-delay:0.1s">
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Africa Investment Forum</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Independent Media</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">African Development Bank</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Distell</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">PLUS Network</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">The Other Foundation</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">IAJ Journalism</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Tiso Blackstar Group</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">SANEF</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">The Perfect Hair</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">AUDA-NEPAD</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Brand Report</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Cricket South Africa</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Arena Holdings</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Richards Bay Minerals</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL SERVICE OFFERINGS -->
+<section class="services-section">
+  <div class="services-inner">
+    <div class="section-heading-center reveal">
+      <h2 style="color:var(--white)">We offer a full range of digital and traditional marketing services.</h2>
+    </div>
+
+    <div class="orbit-grid">
+      <div class="orbit-card reveal">
+        <div class="orbit-name">PR &amp; Reputation</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.05s">
+        <div class="orbit-name">Advertising</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <div class="orbit-name">Content Development</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.05s">
+        <div class="orbit-name">Brand Positioning</div>
+      </div>
+      <div class="orbit-card featured">
+        <div class="orbit-name">Media Buying</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <div class="orbit-name">Digital Strategy</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.15s">
+        <div class="orbit-name">Full-Service Design</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <div class="orbit-name">Events Management</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.2s">
+        <div class="orbit-name">Thought Leadership</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="oxfoot">
+  <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Page hero background slideshow
+  const pgSlides = document.querySelectorAll('.page-hero-slide');
+  const pgDotsWrap = document.getElementById('page-hero-dots');
+  pgSlides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'page-hero-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => pgGoTo(i));
+    pgDotsWrap.appendChild(dot);
+  });
+  const pgDots = document.querySelectorAll('.page-hero-dot');
+  let pgCurrent = 0;
+  function pgGoTo(i) {
+    pgSlides[pgCurrent].classList.remove('active');
+    pgDots[pgCurrent].classList.remove('active');
+    pgCurrent = i;
+    pgSlides[pgCurrent].classList.add('active');
+    pgDots[pgCurrent].classList.add('active');
+  }
+  setInterval(() => { pgGoTo((pgCurrent + 1) % pgSlides.length); }, 5000);
+</script>
+</body>
+</html>
