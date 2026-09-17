@@ -568,7 +568,7 @@
 
   .creativity-visual {
     background: linear-gradient(135deg, rgba(26,0,0,0.55) 0%, rgba(232,0,28,0.75) 100%),
-                url('https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;
+                url('assets/images/webp/photos/strategy-wall.webp') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -665,7 +665,7 @@
 
   /* Glowing card */
   .innovation-card {
-    background: #111 url('https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;
+    background: #111 url('assets/images/webp/photos/event-panel.webp') center/cover;
     border: 1px solid rgba(232,0,28,0.2);
     padding: 3.5rem 3rem;
     position: relative;
@@ -675,8 +675,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.92) 100%);
+    background: linear-gradient(180deg, rgba(13,13,13,0.86) 0%, rgba(13,13,13,0.96) 100%);
   }
+  .innovation-card > * { position: relative; z-index: 2; }
   .innovation-card::after {
     content: '';
     position: absolute;
@@ -901,6 +902,36 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+
+  /* ── FIELD STRIP ── */
+  .fieldstrip { background: var(--black); padding: 4.5rem 0 5rem; overflow: hidden; }
+  .fieldstrip-head { max-width: 1400px; margin: 0 auto 2rem; padding: 0 3rem; display: flex;
+    align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .fieldstrip-head h2 { font-family: var(--display); font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1; letter-spacing: .02em; color: var(--white); }
+  .fieldstrip-head .section-label { color: var(--red); }
+  .fs-link { font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--white); text-decoration: none; border-bottom: 1px solid var(--red); padding-bottom: .25rem; }
+  .fs-link:hover { color: var(--red); }
+  .fs-viewport { display: flex; width: max-content; animation: fs-scroll 55s linear infinite; }
+  .fieldstrip:hover .fs-viewport { animation-play-state: paused; }
+  .fs-row { display: flex; gap: .75rem; padding-right: .75rem; }
+  .fs-tile { position: relative; flex: 0 0 auto; width: 260px; height: 320px; border-radius: 4px;
+    overflow: hidden; display: block; background: #1a1a1a; text-decoration: none; }
+  .fs-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .4s ease;
+    filter: grayscale(.25); }
+  .fs-tile:hover img { transform: scale(1.07); filter: grayscale(0); }
+  .fs-tag { position: absolute; left: .8rem; bottom: .8rem; font-size: .62rem; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--white);
+    background: rgba(13,13,13,.72); padding: .35rem .6rem; border-radius: 3px; }
+  @keyframes fs-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .fs-viewport { animation: none; overflow-x: auto; width: 100%; padding: 0 3rem; }
+  }
+  @media (max-width: 820px) {
+    .fieldstrip-head { padding: 0 1.5rem; }
+    .fs-tile { width: 200px; height: 250px; }
+  }
 </style>
 <style>
 
@@ -984,11 +1015,11 @@
 
 <section class="hero">
   <div class="hero-slides" id="hero-slides">
-    <div class="hero-slide active" style="background-image:url('https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/3243090/pexels-photo-3243090.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+    <div class="hero-slide active" style="background-image:url('assets/images/webp/photos/strategy-wall.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/event-panel.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/product-display.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/wanted-gift-issue.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/team-acsa-wide.webp')"></div>
   </div>
   <div class="hero-overlay"></div>
 
@@ -1068,7 +1099,7 @@
         <p class="about-body">
           As our name suggests, we breathe <strong>life into brands</strong> with our creativity and stellar range of intellectual capital. Oxygen Media brings together top-notch industry expertise, offering a comprehensive package of communications solutions.
         </p>
-        <a href="#" class="about-link">Learn More About Us</a>
+        <a href="about.html" class="about-link">Learn More About Us</a>
       </div>
     </div>
   </div>
@@ -1088,7 +1119,7 @@
 
   <div class="services-grid reveal-stagger">
     <div class="service-card s-photo">
-      <img src="https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Print media" loading="lazy" />
+      <img src="assets/images/webp/photos/press-sunday-times.webp" alt="Print media" loading="lazy" />
       <div class="service-overlay">
         <div class="service-num">01</div>
         <div class="service-name">Print Media</div>
@@ -1106,7 +1137,7 @@
       <p class="service-desc">Compelling stories and cinematic productions that build brand reputation and engage your audience.</p>
     </div>
     <div class="service-card s-wide">
-      <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Brand strategy workshop" loading="lazy" />
+      <img src="assets/images/webp/photos/strategy-sketch.webp" alt="Brand strategy workshop" loading="lazy" />
       <div>
         <div class="service-num">04</div>
         <div class="service-name">Brand Strategy</div>
@@ -1119,7 +1150,7 @@
       <p class="service-desc">Social, search, and content ecosystems that grow brand presence and drive measurable conversions.</p>
     </div>
     <div class="service-card s-photo">
-      <img src="https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Events and activations" loading="lazy" />
+      <img src="assets/images/webp/photos/event-launch.webp" alt="Events and activations" loading="lazy" />
       <div class="service-overlay">
         <div class="service-num">06</div>
         <div class="service-name">Events &amp; Activations</div>
@@ -1153,7 +1184,7 @@
       <p class="innovation-body">
         We redefine communication and shape the future of information sharing. Our team combines cutting-edge media technology with imaginative storytelling to deliver campaigns that resonate across every platform.
       </p>
-      <a href="#" class="btn-primary">Explore Our Work</a>
+      <a href="our-work.html" class="btn-primary">Explore Our Work</a>
     </div>
 
     <div class="innovation-card reveal" style="transition-delay:0.2s">
@@ -1161,6 +1192,48 @@
       <p>
         From SABC broadcast campaigns to viral digital content, our team navigates every media landscape with expertise. We understand how South African audiences consume media and we use that knowledge to drive results for your brand.
       </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- IN THE FIELD -->
+<section class="fieldstrip">
+  <div class="fieldstrip-head reveal">
+    <div>
+      <div class="section-label">In the Field</div>
+      <h2>The Work, Unfiltered</h2>
+    </div>
+    <a href="our-work.html#gallery" class="fs-link">View the full gallery &rsaquo;</a>
+  </div>
+  <div class="fs-viewport">
+    <div class="fs-row">
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/crew-filming-1.webp" alt="Film & videography" loading="lazy" /><span class="fs-tag">Film & videography</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/event-panel.webp" alt="Events" loading="lazy" /><span class="fs-tag">Events</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/studio-set.webp" alt="Broadcast" loading="lazy" /><span class="fs-tag">Broadcast</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/product-display.webp" alt="Activations" loading="lazy" /><span class="fs-tag">Activations</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/press-sunday-times.webp" alt="Print media" loading="lazy" /><span class="fs-tag">Print media</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/team-acsa-wide.webp" alt="On location" loading="lazy" /><span class="fs-tag">On location</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/strategy-wall.webp" alt="Strategy" loading="lazy" /><span class="fs-tag">Strategy</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/wanted-gift-issue.webp" alt="Editorial" loading="lazy" /><span class="fs-tag">Editorial</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/ob-van-exterior.webp" alt="Broadcast" loading="lazy" /><span class="fs-tag">Broadcast</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/event-launch.webp" alt="Events" loading="lazy" /><span class="fs-tag">Events</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/edit-suite.webp" alt="Content" loading="lazy" /><span class="fs-tag">Content</span></a>
+      <a class="fs-tile" href="our-work.html#gallery"><img src="assets/images/webp/photos/activation-easel-2.webp" alt="Activations" loading="lazy" /><span class="fs-tag">Activations</span></a>
+    </div>
+    <div class="fs-row" aria-hidden="true">
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/crew-filming-1.webp" alt="Film & videography" loading="lazy" /><span class="fs-tag">Film & videography</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/event-panel.webp" alt="Events" loading="lazy" /><span class="fs-tag">Events</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/studio-set.webp" alt="Broadcast" loading="lazy" /><span class="fs-tag">Broadcast</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/product-display.webp" alt="Activations" loading="lazy" /><span class="fs-tag">Activations</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/press-sunday-times.webp" alt="Print media" loading="lazy" /><span class="fs-tag">Print media</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/team-acsa-wide.webp" alt="On location" loading="lazy" /><span class="fs-tag">On location</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/strategy-wall.webp" alt="Strategy" loading="lazy" /><span class="fs-tag">Strategy</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/wanted-gift-issue.webp" alt="Editorial" loading="lazy" /><span class="fs-tag">Editorial</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/ob-van-exterior.webp" alt="Broadcast" loading="lazy" /><span class="fs-tag">Broadcast</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/event-launch.webp" alt="Events" loading="lazy" /><span class="fs-tag">Events</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/edit-suite.webp" alt="Content" loading="lazy" /><span class="fs-tag">Content</span></a>
+      <a class="fs-tile" href="our-work.html#gallery" aria-hidden="true" tabindex="-1"><img src="assets/images/webp/photos/activation-easel-2.webp" alt="Activations" loading="lazy" /><span class="fs-tag">Activations</span></a>
     </div>
   </div>
 </section>
@@ -1174,7 +1247,7 @@
   </div>
   <div class="cta-inner">
     <div class="cta-text reveal">Let Us Help You<br/>Re-Energise<br/>Your Brand</div>
-    <a href="#" class="btn-cta">Start a Project</a>
+    <a href="contact.html" class="btn-cta">Start a Project</a>
   </div>
 </section>
 

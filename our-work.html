@@ -175,6 +175,53 @@
   .oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
   .oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
   .oxfoot-bottom a:hover{text-decoration:underline;}
+
+  /* ── GALLERY ── */
+  .gallery { padding: 5rem 3rem 6rem; background: var(--black); color: var(--white); }
+  .gallery-head { max-width: 1400px; margin: 0 auto 2rem; }
+  .gallery-head .section-label { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-bottom: .6rem; }
+  .gallery-head h2 { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: .02em; line-height: 1; }
+  .gallery-head p { max-width: 46ch; margin-top: .9rem; color: rgba(248,245,240,.66); font-size: .95rem; line-height: 1.7; }
+  .gal-filters { max-width: 1400px; margin: 1.8rem auto 2.2rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .gal-filter { font-family: var(--body); font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(248,245,240,.65); background: transparent; border: 1px solid rgba(248,245,240,.18);
+    padding: .5rem 1rem; border-radius: 999px; cursor: pointer; transition: all .2s; }
+  .gal-filter:hover { color: var(--white); border-color: rgba(248,245,240,.45); }
+  .gal-filter.active { background: var(--red); border-color: var(--red); color: #fff; }
+  .gal-grid { max-width: 1400px; margin: 0 auto; columns: 4; column-gap: 1rem; }
+  .gal-item { break-inside: avoid; margin: 0 0 1rem; position: relative; overflow: hidden; border-radius: 4px;
+    cursor: zoom-in; background: #1a1a1a; outline: none; }
+  .gal-item img { width: 100%; height: auto; transition: transform .6s ease, opacity .4s ease; }
+  .gal-item:hover img, .gal-item:focus-visible img { transform: scale(1.06); }
+  .gal-item:focus-visible { box-shadow: 0 0 0 2px var(--red); }
+  .gal-item figcaption { position: absolute; inset: auto 0 0 0; padding: 2.5rem .9rem .9rem;
+    background: linear-gradient(180deg, rgba(13,13,13,0) 0%, rgba(13,13,13,.88) 70%);
+    opacity: 0; transform: translateY(8px); transition: opacity .3s ease, transform .3s ease; }
+  .gal-item:hover figcaption, .gal-item:focus-visible figcaption { opacity: 1; transform: translateY(0); }
+  .gal-cap { display: block; font-size: .85rem; font-weight: 600; color: var(--white); }
+  .gal-cat { display: block; font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--red); margin-top: .25rem; }
+  .gal-item.is-hidden { display: none; }
+
+  /* ── LIGHTBOX ── */
+  .lb { position: fixed; inset: 0; z-index: 999; background: rgba(8,8,8,.96); display: none;
+    align-items: center; justify-content: center; padding: 3.5rem 1rem 4.5rem; }
+  .lb.open { display: flex; }
+  .lb img { max-width: min(1100px, 92vw); max-height: 82vh; width: auto; height: auto; border-radius: 4px; }
+  .lb-caption { position: absolute; left: 0; right: 0; bottom: 1.4rem; text-align: center; color: rgba(248,245,240,.8);
+    font-size: .85rem; letter-spacing: .04em; padding: 0 1rem; }
+  .lb-btn { position: absolute; background: rgba(248,245,240,.08); border: 1px solid rgba(248,245,240,.18);
+    color: var(--white); width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+  .lb-btn:hover { background: var(--red); border-color: var(--red); }
+  .lb-close { top: 1.2rem; right: 1.2rem; }
+  .lb-prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+  body.lb-lock { overflow: hidden; }
+
+  @media (max-width: 1100px) { .gal-grid { columns: 3; } }
+  @media (max-width: 820px)  { .gal-grid { columns: 2; } .gallery { padding: 4rem 1.5rem 4.5rem; } }
+  @media (max-width: 520px)  { .gal-grid { columns: 2; column-gap: .6rem; } .gal-item { margin-bottom: .6rem; }
+    .lb-prev { left: .4rem; } .lb-next { right: .4rem; } }
 </style>
 </head>
 <body>
@@ -222,9 +269,9 @@
 
 <section class="page-hero">
   <div class="page-hero-slides" id="page-hero-slides">
-    <div class="page-hero-slide active" style="background-image:url('assets/images/webp/billboard.webp')"></div>
-    <div class="page-hero-slide" style="background-image:url('assets/images/webp/event-management.webp')"></div>
-    <div class="page-hero-slide" style="background-image:url('assets/images/webp/media-buying.webp')"></div>
+    <div class="page-hero-slide active" style="background-image:url('assets/images/webp/photos/press-clippings.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/photos/event-panel.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/photos/team-acsa-wide.webp')"></div>
   </div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
@@ -244,7 +291,7 @@
   <div class="work-grid">
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/1.jpg" alt="AUDA-NEPAD" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/crew-filming-1.webp" alt="AUDA-NEPAD" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">AUDA-NEPAD</span>
         <span class="work-service">Content Production</span>
@@ -252,7 +299,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/2.jpg" alt="Distell" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/product-display.webp" alt="Distell" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Distell</span>
         <span class="work-service">QR Code Competition</span>
@@ -260,7 +307,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/3.jpg" alt="Business Report" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/press-business-report.webp" alt="Business Report" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Business Report</span>
         <span class="work-service">Events Management</span>
@@ -268,7 +315,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/4.jpg" alt="The African Development Bank" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/press-clippings.webp" alt="The African Development Bank" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">The African Development Bank</span>
         <span class="work-service">Media Buying Strategy</span>
@@ -276,7 +323,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/5.jpg" alt="Cricket SA – Mzansi Super League" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/press-sunday-times.webp" alt="Cricket SA – Mzansi Super League" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Cricket SA – Mzansi Super League</span>
         <span class="work-service">Print Media Execution</span>
@@ -284,7 +331,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/6.jpg" alt="SA National Editors' Forum" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/event-hotel.webp" alt="SA National Editors' Forum" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">SA National Editors' Forum</span>
         <span class="work-service">2018 Nat Nakasa Awards</span>
@@ -292,7 +339,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/7.jpg" alt="Institute for the Advancement of Journalism" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/strategy-sketch.webp" alt="Institute for the Advancement of Journalism" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Institute for the Advancement of Journalism</span>
         <span class="work-service">Re-design Corporate ID</span>
@@ -300,7 +347,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/8.jpg" alt="The South African National AIDS Council" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/ob-van-presenter.webp" alt="The South African National AIDS Council" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">The South African National AIDS Council</span>
         <span class="work-service">Media Buying Strategy</span>
@@ -308,7 +355,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/9.jpg" alt="Independent Media" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/press-mg-skynews.webp" alt="Independent Media" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Independent Media</span>
         <span class="work-service">Advertising &amp; Sponsorship Sales</span>
@@ -316,7 +363,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/10.jpg" alt="Tiso Blackstar (currently Arena Holdings)" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/wanted-gift-issue.webp" alt="Tiso Blackstar (currently Arena Holdings)" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Tiso Blackstar (currently Arena Holdings)</span>
         <span class="work-service">Editorial Concepts</span>
@@ -324,7 +371,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/11.jpg" alt="The Other Foundation" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/event-exhibit.webp" alt="The Other Foundation" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">The Other Foundation</span>
         <span class="work-service">Event Managment</span>
@@ -332,7 +379,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/12.jpg" alt="The Perfect Hair" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/activation-easel-2.webp" alt="The Perfect Hair" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">The Perfect Hair</span>
         <span class="work-service">Brand Activation</span>
@@ -340,7 +387,7 @@
     </a>
 
     <a href="#" class="work-item reveal">
-      <div class="work-thumb"><img src="https://oxygenmedia.co.za/images/work/13.jpg" alt="Richards Bay Minerals" loading="lazy"></div>
+      <div class="work-thumb"><img src="assets/images/webp/photos/magazine-spread-1.webp" alt="Richards Bay Minerals" loading="lazy"></div>
       <div class="work-caption">
         <span class="work-client">Richards Bay Minerals</span>
         <span class="work-service">Media Campaign</span>
@@ -349,6 +396,313 @@
 
   </div>
 </section>
+
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-head reveal">
+    <div class="section-label">In the Field</div>
+    <h2>Behind the Work</h2>
+    <p>Shoots, activations, launches and placements &mdash; a look at what the work actually looks like on the ground.</p>
+  </div>
+  <div class="gal-filters" id="gal-filters">
+    <button class="gal-filter active" data-filter="all">All</button>
+      <button class="gal-filter" data-filter="Brand presence">Brand presence</button>
+      <button class="gal-filter" data-filter="On location">On location</button>
+      <button class="gal-filter" data-filter="Film & videography">Film & videography</button>
+      <button class="gal-filter" data-filter="Content production">Content production</button>
+      <button class="gal-filter" data-filter="Broadcast">Broadcast</button>
+      <button class="gal-filter" data-filter="Events management">Events management</button>
+      <button class="gal-filter" data-filter="Brand activation">Brand activation</button>
+      <button class="gal-filter" data-filter="Design & animation">Design & animation</button>
+      <button class="gal-filter" data-filter="Print media">Print media</button>
+      <button class="gal-filter" data-filter="Strategy">Strategy</button>
+      <button class="gal-filter" data-filter="Behind the scenes">Behind the scenes</button>
+  </div>
+  <div class="gal-grid" id="gal-grid">
+      <figure class="gal-item reveal" data-cat="Brand presence" data-full="assets/images/webp/photos/om-banner.webp" data-caption="Oxygen Media on site" tabindex="0">
+
+        <img src="assets/images/webp/photos/om-banner.webp" alt="Oxygen Media on site — Brand presence" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Oxygen Media on site</span><span class="gal-cat">Brand presence</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="On location" data-full="assets/images/webp/photos/team-acsa-group.webp" data-caption="The team with a client" tabindex="0">
+
+        <img src="assets/images/webp/photos/team-acsa-group.webp" alt="The team with a client — On location" loading="lazy" />
+
+        <figcaption><span class="gal-cap">The team with a client</span><span class="gal-cat">On location</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="On location" data-full="assets/images/webp/photos/team-acsa-wide.webp" data-caption="Client partnership" tabindex="0">
+
+        <img src="assets/images/webp/photos/team-acsa-wide.webp" alt="Client partnership — On location" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Client partnership</span><span class="gal-cat">On location</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Film & videography" data-full="assets/images/webp/photos/crew-filming-1.webp" data-caption="Corporate shoot in progress" tabindex="0">
+
+        <img src="assets/images/webp/photos/crew-filming-1.webp" alt="Corporate shoot in progress — Film & videography" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Corporate shoot in progress</span><span class="gal-cat">Film & videography</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Film & videography" data-full="assets/images/webp/photos/crew-filming-2.webp" data-caption="Crew setting up on a branded set" tabindex="0">
+
+        <img src="assets/images/webp/photos/crew-filming-2.webp" alt="Crew setting up on a branded set — Film & videography" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Crew setting up on a branded set</span><span class="gal-cat">Film & videography</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Film & videography" data-full="assets/images/webp/photos/studio-set.webp" data-caption="Broadcast studio floor" tabindex="0">
+
+        <img src="assets/images/webp/photos/studio-set.webp" alt="Broadcast studio floor — Film & videography" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Broadcast studio floor</span><span class="gal-cat">Film & videography</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Content production" data-full="assets/images/webp/photos/edit-suite.webp" data-caption="In the edit suite" tabindex="0">
+
+        <img src="assets/images/webp/photos/edit-suite.webp" alt="In the edit suite — Content production" loading="lazy" />
+
+        <figcaption><span class="gal-cap">In the edit suite</span><span class="gal-cat">Content production</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Broadcast" data-full="assets/images/webp/photos/ob-van-exterior.webp" data-caption="Outside broadcast unit" tabindex="0">
+
+        <img src="assets/images/webp/photos/ob-van-exterior.webp" alt="Outside broadcast unit — Broadcast" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Outside broadcast unit</span><span class="gal-cat">Broadcast</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Broadcast" data-full="assets/images/webp/photos/ob-van-presenter.webp" data-caption="Live from the OB van" tabindex="0">
+
+        <img src="assets/images/webp/photos/ob-van-presenter.webp" alt="Live from the OB van — Broadcast" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Live from the OB van</span><span class="gal-cat">Broadcast</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Events management" data-full="assets/images/webp/photos/event-panel.webp" data-caption="Panel discussion" tabindex="0">
+
+        <img src="assets/images/webp/photos/event-panel.webp" alt="Panel discussion — Events management" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Panel discussion</span><span class="gal-cat">Events management</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Events management" data-full="assets/images/webp/photos/event-launch.webp" data-caption="Product launch evening" tabindex="0">
+
+        <img src="assets/images/webp/photos/event-launch.webp" alt="Product launch evening — Events management" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Product launch evening</span><span class="gal-cat">Events management</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Events management" data-full="assets/images/webp/photos/event-hotel.webp" data-caption="Awards evening" tabindex="0">
+
+        <img src="assets/images/webp/photos/event-hotel.webp" alt="Awards evening — Events management" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Awards evening</span><span class="gal-cat">Events management</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Events management" data-full="assets/images/webp/photos/event-exhibit.webp" data-caption="Guest experience" tabindex="0">
+
+        <img src="assets/images/webp/photos/event-exhibit.webp" alt="Guest experience — Events management" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Guest experience</span><span class="gal-cat">Events management</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Brand activation" data-full="assets/images/webp/photos/product-display.webp" data-caption="Activation display table" tabindex="0">
+
+        <img src="assets/images/webp/photos/product-display.webp" alt="Activation display table — Brand activation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Activation display table</span><span class="gal-cat">Brand activation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Brand activation" data-full="assets/images/webp/photos/activation-easel-1.webp" data-caption="Campaign artwork on show" tabindex="0">
+
+        <img src="assets/images/webp/photos/activation-easel-1.webp" alt="Campaign artwork on show — Brand activation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Campaign artwork on show</span><span class="gal-cat">Brand activation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Brand activation" data-full="assets/images/webp/photos/activation-easel-2.webp" data-caption="Cover reveal" tabindex="0">
+
+        <img src="assets/images/webp/photos/activation-easel-2.webp" alt="Cover reveal — Brand activation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Cover reveal</span><span class="gal-cat">Brand activation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Brand activation" data-full="assets/images/webp/photos/activation-easel-3.webp" data-caption="Campaign artwork on show" tabindex="0">
+
+        <img src="assets/images/webp/photos/activation-easel-3.webp" alt="Campaign artwork on show — Brand activation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Campaign artwork on show</span><span class="gal-cat">Brand activation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Brand activation" data-full="assets/images/webp/photos/activation-outdoor.webp" data-caption="Outdoor activation" tabindex="0">
+
+        <img src="assets/images/webp/photos/activation-outdoor.webp" alt="Outdoor activation — Brand activation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Outdoor activation</span><span class="gal-cat">Brand activation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Brand activation" data-full="assets/images/webp/photos/exhibit-artwork.webp" data-caption="Exhibition moment" tabindex="0">
+
+        <img src="assets/images/webp/photos/exhibit-artwork.webp" alt="Exhibition moment — Brand activation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Exhibition moment</span><span class="gal-cat">Brand activation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Design & animation" data-full="assets/images/webp/photos/campaign-acsa-pulse.webp" data-caption="Campaign key visual" tabindex="0">
+
+        <img src="assets/images/webp/photos/campaign-acsa-pulse.webp" alt="Campaign key visual — Design & animation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Campaign key visual</span><span class="gal-cat">Design & animation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Design & animation" data-full="assets/images/webp/photos/campaign-acsa-outlook.webp" data-caption="Infographic design" tabindex="0">
+
+        <img src="assets/images/webp/photos/campaign-acsa-outlook.webp" alt="Infographic design — Design & animation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Infographic design</span><span class="gal-cat">Design & animation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Design & animation" data-full="assets/images/webp/photos/campaign-acsa-results.webp" data-caption="Results summary artwork" tabindex="0">
+
+        <img src="assets/images/webp/photos/campaign-acsa-results.webp" alt="Results summary artwork — Design & animation" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Results summary artwork</span><span class="gal-cat">Design & animation</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/press-sunday-times.webp" data-caption="National newspaper placement" tabindex="0">
+
+        <img src="assets/images/webp/photos/press-sunday-times.webp" alt="National newspaper placement — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">National newspaper placement</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/press-business-report.webp" data-caption="Business press placement" tabindex="0">
+
+        <img src="assets/images/webp/photos/press-business-report.webp" alt="Business press placement — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Business press placement</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/press-financial-mail.webp" data-caption="Magazine cover placement" tabindex="0">
+
+        <img src="assets/images/webp/photos/press-financial-mail.webp" alt="Magazine cover placement — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Magazine cover placement</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/press-mg-skynews.webp" data-caption="Press coverage" tabindex="0">
+
+        <img src="assets/images/webp/photos/press-mg-skynews.webp" alt="Press coverage — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Press coverage</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/press-clippings.webp" data-caption="Print clippings" tabindex="0">
+
+        <img src="assets/images/webp/photos/press-clippings.webp" alt="Print clippings — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Print clippings</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/wanted-gift-issue.webp" data-caption="Magazine feature" tabindex="0">
+
+        <img src="assets/images/webp/photos/wanted-gift-issue.webp" alt="Magazine feature — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Magazine feature</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/magazine-spread-1.webp" data-caption="Editorial spread" tabindex="0">
+
+        <img src="assets/images/webp/photos/magazine-spread-1.webp" alt="Editorial spread — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Editorial spread</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/magazine-spread-2.webp" data-caption="Editorial spread" tabindex="0">
+
+        <img src="assets/images/webp/photos/magazine-spread-2.webp" alt="Editorial spread — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Editorial spread</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/magazine-hold-1.webp" data-caption="Issue in hand" tabindex="0">
+
+        <img src="assets/images/webp/photos/magazine-hold-1.webp" alt="Issue in hand — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Issue in hand</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Print media" data-full="assets/images/webp/photos/magazine-hold-2.webp" data-caption="Issue in hand" tabindex="0">
+
+        <img src="assets/images/webp/photos/magazine-hold-2.webp" alt="Issue in hand — Print media" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Issue in hand</span><span class="gal-cat">Print media</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Strategy" data-full="assets/images/webp/photos/strategy-wall.webp" data-caption="Campaign planning wall" tabindex="0">
+
+        <img src="assets/images/webp/photos/strategy-wall.webp" alt="Campaign planning wall — Strategy" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Campaign planning wall</span><span class="gal-cat">Strategy</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Strategy" data-full="assets/images/webp/photos/strategy-sketch.webp" data-caption="Working the idea out" tabindex="0">
+
+        <img src="assets/images/webp/photos/strategy-sketch.webp" alt="Working the idea out — Strategy" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Working the idea out</span><span class="gal-cat">Strategy</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Behind the scenes" data-full="assets/images/webp/photos/office-desk-1.webp" data-caption="In the studio" tabindex="0">
+
+        <img src="assets/images/webp/photos/office-desk-1.webp" alt="In the studio — Behind the scenes" loading="lazy" />
+
+        <figcaption><span class="gal-cap">In the studio</span><span class="gal-cat">Behind the scenes</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Behind the scenes" data-full="assets/images/webp/photos/office-desk-2.webp" data-caption="In the studio" tabindex="0">
+
+        <img src="assets/images/webp/photos/office-desk-2.webp" alt="In the studio — Behind the scenes" loading="lazy" />
+
+        <figcaption><span class="gal-cap">In the studio</span><span class="gal-cat">Behind the scenes</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Behind the scenes" data-full="assets/images/webp/photos/office-desk-3.webp" data-caption="In the studio" tabindex="0">
+
+        <img src="assets/images/webp/photos/office-desk-3.webp" alt="In the studio — Behind the scenes" loading="lazy" />
+
+        <figcaption><span class="gal-cap">In the studio</span><span class="gal-cat">Behind the scenes</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Behind the scenes" data-full="assets/images/webp/photos/office-desk-4.webp" data-caption="In the studio" tabindex="0">
+
+        <img src="assets/images/webp/photos/office-desk-4.webp" alt="In the studio — Behind the scenes" loading="lazy" />
+
+        <figcaption><span class="gal-cap">In the studio</span><span class="gal-cat">Behind the scenes</span></figcaption>
+
+      </figure>
+      <figure class="gal-item reveal" data-cat="Behind the scenes" data-full="assets/images/webp/photos/team-offsite.webp" data-caption="Team offsite" tabindex="0">
+
+        <img src="assets/images/webp/photos/team-offsite.webp" alt="Team offsite — Behind the scenes" loading="lazy" />
+
+        <figcaption><span class="gal-cap">Team offsite</span><span class="gal-cat">Behind the scenes</span></figcaption>
+
+      </figure>
+  </div>
+</section>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-btn lb-close" id="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous">&lsaquo;</button>
+  <img id="lb-img" alt="" />
+  <button class="lb-btn lb-next" id="lb-next" aria-label="Next">&rsaquo;</button>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
 
 <footer class="oxfoot">
   <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
@@ -385,6 +739,69 @@
     pgDots[pgCurrent].classList.add('active');
   }
   setInterval(() => { pgGoTo((pgCurrent + 1) % pgSlides.length); }, 5000);
+</script>
+
+<script>
+(function(){
+  var grid = document.getElementById('gal-grid');
+  if (!grid) return;
+  var items = Array.prototype.slice.call(grid.querySelectorAll('.gal-item'));
+  var visible = items.slice();
+
+  document.getElementById('gal-filters').addEventListener('click', function(e){
+    var btn = e.target.closest('.gal-filter');
+    if (!btn) return;
+    this.querySelectorAll('.gal-filter').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    items.forEach(function(it){
+      it.classList.toggle('is-hidden', f !== 'all' && it.getAttribute('data-cat') !== f);
+    });
+    visible = items.filter(function(it){ return !it.classList.contains('is-hidden'); });
+  });
+
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  var lbCap = document.getElementById('lb-caption');
+  var idx = 0;
+
+  function show(i){
+    if (!visible.length) return;
+    idx = (i + visible.length) % visible.length;
+    var el = visible[idx];
+    lbImg.src = el.getAttribute('data-full');
+    lbImg.alt = el.querySelector('img').alt;
+    lbCap.textContent = el.getAttribute('data-caption') + ' \u2014 ' + el.getAttribute('data-cat');
+  }
+  function open(el){
+    visible = items.filter(function(it){ return !it.classList.contains('is-hidden'); });
+    show(visible.indexOf(el));
+    lb.classList.add('open');
+    document.body.classList.add('lb-lock');
+  }
+  function close(){ lb.classList.remove('open'); document.body.classList.remove('lb-lock'); lbImg.removeAttribute('src'); }
+
+  grid.addEventListener('click', function(e){
+    var it = e.target.closest('.gal-item');
+    if (it) open(it);
+  });
+  grid.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var it = e.target.closest('.gal-item');
+    if (it) { e.preventDefault(); open(it); }
+  });
+
+  document.getElementById('lb-close').addEventListener('click', close);
+  document.getElementById('lb-prev').addEventListener('click', function(e){ e.stopPropagation(); show(idx - 1); });
+  document.getElementById('lb-next').addEventListener('click', function(e){ e.stopPropagation(); show(idx + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+})();
 </script>
 </body>
 </html>
