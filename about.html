@@ -130,10 +130,11 @@
   .channel-item:hover { color: var(--red); }
   .channel-item .ch-icon {
     width: 36px; height: 36px; border-radius: 50%;
-    background: var(--light); display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; flex-shrink: 0; transition: background 0.2s;
+    background: var(--light); color: var(--red); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; transition: background 0.2s, color 0.2s;
   }
-  .channel-item:hover .ch-icon { background: var(--red); }
+  .channel-item:hover .ch-icon { background: var(--red); color: var(--white); }
+  .ch-icon svg, .ci-badge svg { width: 55%; height: 55%; display: block; }
 
   /* Stat stack */
   .stat-stack { display: flex; flex-direction: column; gap: 0; }
@@ -245,24 +246,35 @@
   }
   .services-intro-text { font-size: 0.9rem; color: var(--grey); max-width: 340px; line-height: 1.75; }
 
-  .orbit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #222; }
+  .orbit-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2.75rem 1.75rem; max-width: 660px; margin: 0 auto;
+    justify-items: center; align-items: center;
+  }
   .orbit-card {
-    background: #111; padding: 2.5rem 2rem;
-    display: flex; flex-direction: column; gap: 0.75rem;
-    cursor: default; transition: background 0.25s; position: relative;
+    width: 150px; height: 150px; border-radius: 50%;
+    background: var(--white);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+    text-align: center; padding: 1.25rem;
+    cursor: default; transition: transform 0.3s, box-shadow 0.3s;
   }
-  .orbit-card.featured { background: var(--red); }
-  .orbit-card:not(.featured):hover { background: #1c1c1c; }
-  .orbit-card::before {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 100%; height: 2px; background: var(--red);
-    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  .orbit-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -10px rgba(0,0,0,0.4); }
+  .orbit-card.featured {
+    width: 190px; height: 190px; background: var(--red);
+    box-shadow: 0 10px 24px -8px rgba(0,0,0,0.35);
   }
-  .orbit-card:not(.featured):hover::before { transform: scaleX(1); }
-  .orbit-icon { font-size: 1.6rem; }
-  .orbit-name { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.04em; color: var(--white); }
-  .orbit-card.featured .orbit-name { color: var(--white); }
-
+  .orbit-icon { width: 1.9rem; height: 1.9rem; color: var(--red); display: block; }
+  .orbit-card.featured .orbit-icon { color: var(--white); width: 2.3rem; height: 2.3rem; }
+  .orbit-name { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.02em; color: var(--black); line-height: 1.15; }
+  .orbit-card.featured .orbit-name { color: var(--white); font-size: 1.1rem; }
+  @media (max-width: 760px) {
+    .orbit-grid { grid-template-columns: repeat(2, 1fr); max-width: 380px; gap: 1.75rem 1.25rem; }
+    .orbit-card.featured { grid-column: span 2; }
+  }
+  @media (max-width: 420px) {
+    .orbit-grid { grid-template-columns: 1fr; max-width: 220px; }
+    .orbit-card.featured { grid-column: span 1; }
+  }
   /* ── CLIENTS ── */
   .clients { background: var(--light); padding: 6rem 3rem; }
   .clients-inner { max-width: 1200px; margin: 0 auto; }
@@ -275,30 +287,39 @@
 
   .clients-strip {
     display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 2px; background: #d8d8d8;
+    gap: 1rem;
   }
   .client-cell {
-    background: var(--white); padding: 2rem 1.5rem;
+    background: var(--white); border-radius: 12px; padding: 1.4rem 1rem 1.1rem;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; text-align: center; transition: background 0.2s;
-    min-height: 110px;
+    gap: 0.75rem; text-align: center; transition: transform 0.25s, box-shadow 0.25s;
   }
-  .client-cell:hover { background: var(--black); }
-  .client-cell:hover .client-name { color: var(--white); }
+  .client-cell:hover { transform: translateY(-4px); box-shadow: 0 16px 34px -18px rgba(0,0,0,0.3); }
+  .client-logo-img {
+    width: 100%; height: 64px; object-fit: cover; border-radius: 8px;
+    filter: grayscale(1); opacity: 0.82; transition: filter 0.3s, opacity 0.3s;
+  }
+  .client-cell:hover .client-logo-img { filter: grayscale(0); opacity: 1; }
   .client-name {
-    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #444; transition: color 0.2s;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #444;
   }
-  .client-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
 
   /* ── CTA BANNER ── */
   .cta-banner {
     background: var(--red); padding: 6rem 3rem; overflow: hidden; position: relative;
   }
-  .cta-banner::before {
-    content: 'UNMISSABLE'; font-family: var(--display); font-size: 16rem; color: rgba(0,0,0,0.12);
-    position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
-    white-space: nowrap; pointer-events: none; line-height: 1;
+  .cta-bg-marquee {
+    position: absolute; inset: 0; display: flex; align-items: center; overflow: hidden; pointer-events: none;
+  }
+  .cta-bg-track { display: inline-flex; animation: ctaMarquee 16s linear infinite; }
+  .cta-bg-track span {
+    font-family: var(--display); font-size: 16rem; color: rgba(0,0,0,0.12);
+    white-space: nowrap; line-height: 1; padding-right: 3rem;
+  }
+  @keyframes ctaMarquee {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
   }
   .cta-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 3rem; position: relative; z-index: 1; }
   .cta-text { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 5rem); color: var(--white); line-height: 1.0; }
@@ -345,7 +366,6 @@
     .who-inner, .media-buying-header, .campaigns-inner { grid-template-columns: 1fr; gap: 3rem; }
     .pillars-grid { grid-template-columns: 1fr; }
     .reach-grid { grid-template-columns: repeat(2, 1fr); }
-    .orbit-grid { grid-template-columns: repeat(2, 1fr); }
     .clients-strip { grid-template-columns: repeat(3, 1fr); }
     .cta-inner { flex-direction: column; align-items: flex-start; }
     .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -441,10 +461,16 @@
   .oxnav-toggle{display:flex;}
 }
 
-.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:26px clamp(20px,4vw,56px);text-align:center;border-top:1px solid rgba(20,16,15,.08);}
-.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
+.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:30px clamp(20px,4vw,56px);border-top:1px solid rgba(20,16,15,.08);}
+.oxfoot-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);text-align:center;}
 .oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
 .oxfoot-bottom a:hover{text-decoration:underline;}
+.oxfoot-social{display:flex;gap:9px;}
+.oxfoot-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+.oxfoot-social a svg{width:12px;height:12px;display:block;}
+.oxfoot-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+@media (max-width:640px){.oxfoot-inner{flex-direction:column;text-align:center;}}
 
 </style>
 </head>
@@ -453,7 +479,7 @@
 <!-- PAGE HERO -->
 <header class="oxnav">
   <a href="index.html" class="oxnav-brand">
-    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+    <span class="oxnav-word"><em>O</em>XYGENMEDIA</span>
   </a>
   <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
     <a href="index.html">Home</a>
@@ -494,9 +520,9 @@
 
 <section class="page-hero">
   <div class="page-hero-slides" id="page-hero-slides">
-    <div class="page-hero-slide active" style="background-image:url('assets/images/webp/photos/team-acsa-wide.webp')"></div>
+    <div class="page-hero-slide active" style="background-image:url('assets/images/webp/photos/team-acsa-group.webp')"></div>
+    <div class="page-hero-slide" style="background-image:url('assets/images/webp/photos/office-desk-1.webp')"></div>
     <div class="page-hero-slide" style="background-image:url('assets/images/webp/photos/strategy-wall.webp')"></div>
-    <div class="page-hero-slide" style="background-image:url('assets/images/webp/photos/event-panel.webp')"></div>
   </div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
@@ -524,11 +550,11 @@
       </p>
 
       <div class="channel-list">
-        <div class="channel-item"><div class="ch-icon">&#128246;</div> All commercial &amp; community radio stations</div>
-        <div class="channel-item"><div class="ch-icon">&#128240;</div> Print media that still packs a punch</div>
-        <div class="channel-item"><div class="ch-icon">&#127961;</div> Outdoor billboards that grab attention</div>
-        <div class="channel-item"><div class="ch-icon">&#128250;</div> Television advertising that tells your story</div>
-        <div class="channel-item"><div class="ch-icon">&#127760;</div> Digital platforms for the modern audience</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 12v9" stroke-linecap="round"/><path d="M8.5 8.5a5 5 0 0 1 7 0M6 6a8.5 8.5 0 0 1 12 0" stroke-linecap="round"/><circle cx="12" cy="12" r="2.2"/></svg></div> All commercial &amp; community radio stations</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="16" rx="1.5"/><path d="M7 8h6M7 11.5h6M7 15h4" stroke-linecap="round"/><path d="M17 8h2.5a1.5 1.5 0 0 1 1.5 1.5V18a2 2 0 0 1-2 2H8" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Print media that still packs a punch</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="10" rx="1"/><path d="M8 14v4M16 14v4M6 22l2-4M18 22l-2-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Outdoor billboards that grab attention</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 21h8M12 19v2M8 3l4 3 4-3" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Television advertising that tells your story</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9Z"/></svg></div> Digital platforms for the modern audience</div>
       </div>
     </div>
 
@@ -551,11 +577,11 @@
       <h3>Maximum Value</h3>
       <p class="lead">We negotiate the <strong style="color:var(--red)">best deals</strong> for:</p>
       <div class="channel-icon-row">
-        <div class="channel-icon"><div class="ci-badge">&#128246;</div><span>Radio</span></div>
-        <div class="channel-icon"><div class="ci-badge">&#128250;</div><span>TV</span></div>
-        <div class="channel-icon"><div class="ci-badge">&#128240;</div><span>Print</span></div>
-        <div class="channel-icon"><div class="ci-badge">&#127961;</div><span>Outdoor</span></div>
-        <div class="channel-icon"><div class="ci-badge">&#127760;</div><span>Digital</span></div>
+        <div class="channel-icon"><div class="ci-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 12v9" stroke-linecap="round"/><path d="M8.5 8.5a5 5 0 0 1 7 0M6 6a8.5 8.5 0 0 1 12 0" stroke-linecap="round"/><circle cx="12" cy="12" r="2.2"/></svg></div><span>Radio</span></div>
+        <div class="channel-icon"><div class="ci-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 21h8M12 19v2M8 3l4 3 4-3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>TV</span></div>
+        <div class="channel-icon"><div class="ci-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="16" rx="1.5"/><path d="M7 8h6M7 11.5h6M7 15h4" stroke-linecap="round"/><path d="M17 8h2.5a1.5 1.5 0 0 1 1.5 1.5V18a2 2 0 0 1-2 2H8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Print</span></div>
+        <div class="channel-icon"><div class="ci-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="10" rx="1"/><path d="M8 14v4M16 14v4M6 22l2-4M18 22l-2-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Outdoor</span></div>
+        <div class="channel-icon"><div class="ci-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9Z"/></svg></div><span>Digital</span></div>
       </div>
       <p class="discount-line">All discounts? <strong>Passed straight to you.</strong></p>
     </div>
@@ -589,9 +615,9 @@
       <div class="section-label">National Reach &amp; Local Expertise</div>
       <h2 class="reach-title">Access to Every Major Media Platform in South Africa</h2>
       <div class="channel-list" style="max-width:640px;margin-top:2rem">
-        <div class="channel-item"><div class="ch-icon">&#9989;</div> Access to all major media platforms</div>
-        <div class="channel-item"><div class="ch-icon">&#9989;</div> Unbeatable rates &amp; industry connections</div>
-        <div class="channel-item"><div class="ch-icon">&#9989;</div> Over 6,000 listings with lightning-fast booking</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5 9.5 17 19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Access to all major media platforms</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5 9.5 17 19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Unbeatable rates &amp; industry connections</div>
+        <div class="channel-item"><div class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5 9.5 17 19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Over 6,000 listings with lightning-fast booking</div>
       </div>
     </div>
 
@@ -623,6 +649,9 @@
 
 <!-- CTA -->
 <section class="cta-banner">
+  <div class="cta-bg-marquee" aria-hidden="true">
+    <div class="cta-bg-track"><span>UNMISSABLE</span><span>UNMISSABLE</span></div>
+  </div>
   <div class="cta-inner stacked">
     <div class="cta-text reveal">Let's Make Your<br/>Brand Unmissable</div>
     <p class="cta-sub reveal">Ready to dominate your space? <strong>Let Oxygen Media be your unfair advantage.</strong></p>
@@ -637,21 +666,21 @@
     </div>
     <p class="clients-offering reveal">Our offering includes: brand campaigns, media strategy, web design, event management, content production and media buying.</p>
     <div class="clients-strip reveal" style="transition-delay:0.1s">
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Africa Investment Forum</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Independent Media</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">African Development Bank</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Distell</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">PLUS Network</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">The Other Foundation</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">IAJ Journalism</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Tiso Blackstar Group</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">SANEF</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">The Perfect Hair</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">AUDA-NEPAD</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Brand Report</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Cricket South Africa</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Arena Holdings</div></div>
-      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Richards Bay Minerals</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/billboard.webp" alt="Africa Investment Forum" loading="lazy" /><div class="client-name">Africa Investment Forum</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/newspaper.webp" alt="Independent Media" loading="lazy" /><div class="client-name">Independent Media</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/press-financial-mail.webp" alt="African Development Bank" loading="lazy" /><div class="client-name">African Development Bank</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/product-display.webp" alt="Distell" loading="lazy" /><div class="client-name">Distell</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/event-exhibit.webp" alt="PLUS Network" loading="lazy" /><div class="client-name">PLUS Network</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/team-offsite.webp" alt="The Other Foundation" loading="lazy" /><div class="client-name">The Other Foundation</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/press-clippings.webp" alt="IAJ Journalism" loading="lazy" /><div class="client-name">IAJ Journalism</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/magazine.webp" alt="Tiso Blackstar Group" loading="lazy" /><div class="client-name">Tiso Blackstar Group</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/event-panel.webp" alt="SANEF" loading="lazy" /><div class="client-name">SANEF</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/brand-activation.webp" alt="The Perfect Hair" loading="lazy" /><div class="client-name">The Perfect Hair</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/strategy-wall.webp" alt="AUDA-NEPAD" loading="lazy" /><div class="client-name">AUDA-NEPAD</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/press-business-report.webp" alt="Brand Report" loading="lazy" /><div class="client-name">Brand Report</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/media-print.webp" alt="Cricket South Africa" loading="lazy" /><div class="client-name">Cricket South Africa</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/photos/magazine-spread-2.webp" alt="Arena Holdings" loading="lazy" /><div class="client-name">Arena Holdings</div></div>
+      <div class="client-cell"><img class="client-logo-img" src="assets/images/webp/event-management.webp" alt="Richards Bay Minerals" loading="lazy" /><div class="client-name">Richards Bay Minerals</div></div>
     </div>
   </div>
 </section>
@@ -665,30 +694,39 @@
 
     <div class="orbit-grid">
       <div class="orbit-card reveal">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="orbit-name">PR &amp; Reputation</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.05s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10v4a1 1 0 0 0 1 1h2l4.5 3.4a1 1 0 0 0 1.6-.8V6.4a1 1 0 0 0-1.6-.8L6 9H4a1 1 0 0 0-1 1z" stroke-linejoin="round"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" stroke-linecap="round"/></svg>
         <div class="orbit-name">Advertising</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l.9-4L16.4 4.5a1.6 1.6 0 0 1 2.3 0l.8.8a1.6 1.6 0 0 1 0 2.3L8 19.1z" stroke-linejoin="round"/><path d="M14.7 6.6l2.7 2.7" /></svg>
         <div class="orbit-name">Content Development</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.05s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
         <div class="orbit-name">Brand Positioning</div>
       </div>
       <div class="orbit-card featured">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="orbit-name">Media Buying</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="orbit-name">Digital Strategy</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.15s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3C6.5 3 2 7 2 11.5 2 16 5.6 19 10 19c.7 0 1.2-.6 1.1-1.3-.1-.6.4-1.2 1-1.2h3a4.9 4.9 0 0 0 4.9-4.9C20 6.6 16.6 3 12 3z" stroke-linejoin="round"/><circle cx="7.2" cy="11" r="1"/><circle cx="9.8" cy="7.3" r="1"/><circle cx="14.3" cy="7.3" r="1"/><circle cx="16.9" cy="11" r="1"/></svg>
         <div class="orbit-name">Full-Service Design</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4.5a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3.5M9 20.5h6" stroke-linecap="round"/></svg>
         <div class="orbit-name">Events Management</div>
       </div>
       <div class="orbit-card reveal" style="transition-delay:0.2s">
+        <svg class="orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18h6M9.5 21h5M8 15.5A5.5 5.5 0 1 1 16 15.5c0 2-1 2.7-1.5 3.5h-5c-.5-.8-1.5-1.5-1.5-3.5z" stroke-linejoin="round"/></svg>
         <div class="orbit-name">Thought Leadership</div>
       </div>
     </div>
@@ -696,7 +734,15 @@
 </section>
 
 <footer class="oxfoot">
-  <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+  <div class="oxfoot-inner">
+    <span class="oxnav-word"><em>O</em>XYGENMEDIA</span>
+    <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+    <div class="oxfoot-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
 </footer>
 
 <script>

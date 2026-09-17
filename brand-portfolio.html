@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Work — Oxygen Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#14100F; --ink-soft:#1F1A18;
-  --red:#E8283B; --red-deep:#B4152A;
+  --red:#E8001C; --red-deep:#B4152A;
   --cyan:#00E6C3; --amber:#FFB238;
   --paper:#FBF7F1; --mute:#8A8378;
   --line: rgba(20,16,15,0.1); --line-light: rgba(251,247,241,0.16);
@@ -18,7 +18,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 ul{margin:0;padding:0;list-style:none;}
@@ -47,15 +47,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 .hero-slides{position:absolute;inset:0;z-index:0;}
 .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease, transform 8s ease;}
 .hero-slide.active{opacity:1;transform:scale(1);}
-.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,16,15,.5) 0%,rgba(20,16,15,.8) 65%,var(--ink) 100%),radial-gradient(ellipse 60% 60% at 75% 30%,rgba(232,40,59,.18) 0%,transparent 70%);}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,13,13,.5) 0%,rgba(13,13,13,.8) 65%,var(--ink) 100%),radial-gradient(ellipse 60% 60% at 75% 30%,rgba(232,0,28,.16) 0%,transparent 70%);}
 .hero-body{position:relative;z-index:2;max-width:560px;display:flex;flex-direction:column;align-items:flex-end;}
-.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--cyan);margin-bottom:20px;font-weight:700;}
-.eyebrow-rule{width:38px;height:2px;background:var(--cyan);display:inline-block;}
-.hero-title{color:var(--paper);font-size:clamp(2.2rem,5.6vw,4rem);text-transform:uppercase;}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--body);font-size:.72rem;font-weight:600;letter-spacing:.2em;color:var(--red);margin-bottom:20px;text-transform:uppercase;}
+.eyebrow-rule{width:38px;height:2px;background:var(--red);display:inline-block;}
+.hero-title{color:var(--paper);font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.2rem);letter-spacing:-0.01em;line-height:0.98;text-transform:uppercase;}
 .hero-title .hl{color:var(--red);}
 .hero-dots{position:absolute;bottom:1.75rem;right:2rem;z-index:2;display:flex;gap:.6rem;}
 .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(251,247,241,.3);transition:background .3s, transform .3s;}
 .hero-dot.active{background:var(--red);transform:scale(1.3);}
+.breadcrumb-bar{background:var(--red);padding:.65rem clamp(20px,4vw,56px);display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(251,247,241,.8);}
+.breadcrumb-bar a{color:rgba(251,247,241,.65);text-decoration:none;}
+.breadcrumb-bar a:hover{color:var(--paper);}
+.breadcrumb-bar span{color:rgba(251,247,241,.4);}
 
 /* filter bar */
 .filters{max-width:var(--container);margin:0 auto;padding:54px clamp(20px,4vw,56px) 0;}
@@ -81,6 +85,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 .case[hidden]{display:none;}
 .case-media{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:26px;text-align:center;}
 .case-media img{width:100%;height:100%;object-fit:cover;}
+.case.has-img .case-media{padding:0;}
+.case.has-img .case-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,15,0) 45%,rgba(20,16,15,.55) 100%);}
 .case-mark{font-family:var(--display);font-size:1.05rem;letter-spacing:.02em;line-height:1.2;color:var(--paper);text-transform:uppercase;}
 .case-cat{
   position:absolute;top:14px;left:14px;z-index:2;
@@ -174,10 +180,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
   .oxnav-toggle{display:flex;}
 }
 
-.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:26px clamp(20px,4vw,56px);text-align:center;border-top:1px solid rgba(20,16,15,.08);}
-.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
+.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:30px clamp(20px,4vw,56px);border-top:1px solid rgba(20,16,15,.08);}
+.oxfoot-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);text-align:center;}
 .oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
 .oxfoot-bottom a:hover{text-decoration:underline;}
+.oxfoot-social{display:flex;gap:9px;}
+.oxfoot-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+.oxfoot-social a svg{width:12px;height:12px;display:block;}
+.oxfoot-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+@media (max-width:640px){.oxfoot-inner{flex-direction:column;text-align:center;}}
 
 </style>
 </head>
@@ -185,7 +197,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 
 <header class="oxnav">
   <a href="index.html" class="oxnav-brand">
-    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+    <span class="oxnav-word"><em>O</em>XYGENMEDIA</span>
   </a>
   <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
     <a href="index.html">Home</a>
@@ -228,18 +240,23 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 <section class="hero">
   <div class="hero-slides" id="hero-slides">
     <div class="hero-slide active" style="background-image:url('assets/images/webp/photos/product-display.webp')"></div>
-    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/event-panel.webp')"></div>
-    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/exhibit-artwork.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/strategy-sketch.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/activation-easel-2.webp')"></div>
   </div>
   <div class="hero-overlay"></div>
 
   <div class="hero-body">
-    <p class="eyebrow"><span class="eyebrow-rule"></span>OUR WORK</p>
+    <p class="eyebrow">OUR WORK<span class="eyebrow-rule"></span></p>
     <h1 class="hero-title">Brand <span class="hl">Portfolio</span></h1>
   </div>
 
   <div class="hero-dots" id="hero-dots"></div>
 </section>
+<div class="breadcrumb-bar">
+  <a href="index.html">Home</a>
+  <span>&rsaquo;</span>
+  <span style="color:rgba(251,247,241,0.9)">Brand Portfolio</span>
+</div>
 
 <!-- FILTERS -->
 <section class="filters">
@@ -260,21 +277,21 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 <section class="portfolio">
   <div class="grid" id="caseGrid">
 
-    <article class="case bg-forest" data-cat="content" data-reveal>
+    <article class="case has-img bg-forest" data-cat="content" data-reveal>
       <div class="case-cat">Content</div>
-      <div class="case-media"><span class="case-mark">AUDA‑NEPAD</span></div>
+      <div class="case-media"><img src="assets/images/webp/photos/strategy-wall.webp" alt="AUDA‑NEPAD content production" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">AUDA‑NEPAD</p><p class="case-project">Content Production</p></div>
     </article>
 
-    <article class="case bg-navy" data-cat="brand" data-reveal>
+    <article class="case has-img bg-navy" data-cat="brand" data-reveal>
       <div class="case-cat">Brand</div>
-      <div class="case-media"><span class="case-mark">DISTELL</span></div>
+      <div class="case-media"><img src="assets/images/webp/photos/product-display.webp" alt="Distell QR code competition" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Distell</p><p class="case-project">QR Code Competition</p></div>
     </article>
 
-    <article class="case bg-editorial" data-cat="content" data-reveal>
+    <article class="case has-img bg-editorial" data-cat="content" data-reveal>
       <div class="case-cat">Editorial</div>
-      <div class="case-media"><span class="case-mark">BR — BUSINESS REPORT</span></div>
+      <div class="case-media"><img src="assets/images/webp/photos/press-business-report.webp" alt="Business Report events management" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Business Report</p><p class="case-project">Events Management</p></div>
     </article>
 
@@ -284,9 +301,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
       <div class="case-info"><p class="case-client">The African Development Bank</p><p class="case-project">Media Buying Strategy</p></div>
     </article>
 
-    <article class="case bg-cricket" data-cat="media" data-reveal>
+    <article class="case has-img bg-cricket" data-cat="media" data-reveal>
       <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">CRICKET · MZANSI SUPER LEAGUE</span></div>
+      <div class="case-media"><img src="assets/images/webp/media-print.webp" alt="Cricket SA print media execution" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Cricket SA – Mzansi Super League</p><p class="case-project">Print Media Execution</p></div>
     </article>
 
@@ -296,9 +313,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
       <div class="case-info"><p class="case-client">SA National Editors' Forum</p><p class="case-project">2018 Nat Nakasa Awards</p></div>
     </article>
 
-    <article class="case bg-shield" data-cat="brand" data-reveal>
+    <article class="case has-img bg-shield" data-cat="brand" data-reveal>
       <div class="case-cat">Brand</div>
-      <div class="case-media"><span class="case-mark">IAJ</span></div>
+      <div class="case-media"><img src="assets/images/webp/service-brand.webp" alt="IAJ corporate identity redesign" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Institute for the Advancement of Journalism</p><p class="case-project">Re‑design Corporate ID</p></div>
     </article>
 
@@ -308,15 +325,15 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
       <div class="case-info"><p class="case-client">The South African National AIDS Council</p><p class="case-project">Media Buying Strategy</p></div>
     </article>
 
-    <article class="case bg-clean" data-cat="media" data-reveal>
+    <article class="case has-img bg-clean" data-cat="media" data-reveal>
       <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">INDEPENDENT</span></div>
+      <div class="case-media"><img src="assets/images/webp/newspaper.webp" alt="Independent Media advertising and sponsorship" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Independent Media</p><p class="case-project">Advertising &amp; Sponsorship Sales</p></div>
     </article>
 
-    <article class="case bg-black" data-cat="content" data-reveal>
+    <article class="case has-img bg-black" data-cat="content" data-reveal>
       <div class="case-cat">Editorial</div>
-      <div class="case-media"><span class="case-mark">ARENA HOLDINGS</span></div>
+      <div class="case-media"><img src="assets/images/webp/photos/magazine-spread-1.webp" alt="Arena Holdings editorial concepts" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Tiso Blackstar (currently Arena Holdings)</p><p class="case-project">Editorial Concepts</p></div>
     </article>
 
@@ -326,15 +343,15 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
       <div class="case-info"><p class="case-client">The Other Foundation</p><p class="case-project">Event Management</p></div>
     </article>
 
-    <article class="case bg-hair" data-cat="brand" data-reveal>
+    <article class="case has-img bg-hair" data-cat="brand" data-reveal>
       <div class="case-cat">Brand</div>
-      <div class="case-media"><span class="case-mark">THE PERFECT HAIR</span></div>
+      <div class="case-media"><img src="assets/images/webp/brand-activation.webp" alt="The Perfect Hair brand activation" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">The Perfect Hair</p><p class="case-project">Brand Activation</p></div>
     </article>
 
-    <article class="case bg-earth" data-cat="media" data-reveal>
+    <article class="case has-img bg-earth" data-cat="media" data-reveal>
       <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">RICHARDS BAY MINERALS</span></div>
+      <div class="case-media"><img src="assets/images/webp/billboard.webp" alt="Richards Bay Minerals media campaign" loading="lazy" /></div>
       <div class="case-info"><p class="case-client">Richards Bay Minerals</p><p class="case-project">Media Campaign</p></div>
     </article>
 
@@ -349,7 +366,15 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 </section>
 
 <footer class="oxfoot">
-  <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+  <div class="oxfoot-inner">
+    <span class="oxnav-word"><em>O</em>XYGENMEDIA</span>
+    <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+    <div class="oxfoot-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
 </footer>
 
 <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>

@@ -327,10 +327,16 @@
   .oxnav-toggle{display:flex;}
 }
 
-.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:26px clamp(20px,4vw,56px);text-align:center;border-top:1px solid rgba(20,16,15,.08);}
-.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
+.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:30px clamp(20px,4vw,56px);border-top:1px solid rgba(20,16,15,.08);}
+.oxfoot-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);text-align:center;}
 .oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
 .oxfoot-bottom a:hover{text-decoration:underline;}
+.oxfoot-social{display:flex;gap:9px;}
+.oxfoot-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+.oxfoot-social a svg{width:12px;height:12px;display:block;}
+.oxfoot-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+@media (max-width:640px){.oxfoot-inner{flex-direction:column;text-align:center;}}
 
 </style>
 </head>
@@ -339,7 +345,7 @@
 <!-- PAGE HERO -->
 <header class="oxnav">
   <a href="index.html" class="oxnav-brand">
-    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+    <span class="oxnav-word"><em>O</em>XYGENMEDIA</span>
   </a>
   <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
     <a href="index.html">Home</a>
@@ -381,8 +387,8 @@
 <section class="page-hero">
   <div class="hero-slides" id="hero-slides">
     <div class="hero-slide active" style="background-image:url('assets/images/webp/photos/press-clippings.webp')"></div>
-    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/strategy-wall.webp')"></div>
-    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/team-acsa-wide.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/ob-van-exterior.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/images/webp/photos/campaign-acsa-outlook.webp')"></div>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -442,22 +448,22 @@
 
     <div class="approach-grid">
       <div class="approach-card reveal">
-        <div class="approach-icon">🔍</div>
+        <div class="approach-icon"><svg style="width:2rem;height:2rem;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8" stroke-linecap="round"/></svg></div>
         <div class="approach-card-title">In-Depth Media Analysis</div>
         <p class="approach-card-desc">Comprehensive analysis of your target audience, market trends, and competitor media activity — giving us the intelligence to outplace the competition before we spend a single rand.</p>
       </div>
       <div class="approach-card reveal" style="transition-delay:0.1s">
-        <div class="approach-icon">🗺️</div>
+        <div class="approach-icon"><svg style="width:2rem;height:2rem;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z" stroke-linejoin="round"/><path d="M9 4v14M15 6v14" /></svg></div>
         <div class="approach-card-title">Strategic Media Planning</div>
         <p class="approach-card-desc">Development of tailored media plans that align with your business objectives and target audience — mapping channels, timing, frequency, and budget allocation with precision.</p>
       </div>
       <div class="approach-card reveal" style="transition-delay:0.05s">
-        <div class="approach-icon">🤝</div>
+        <div class="approach-icon"><svg style="width:2rem;height:2rem;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10.5 9.5 6l3 2v3l-3 2.2L3 9.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M21 10.5 14.5 6l-3 2v3l3 2.2 6.5-3.7" stroke-linejoin="round" stroke-linecap="round"/><path d="M9.5 13.5v3.3l2.5 2 2.5-2v-3.3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
         <div class="approach-card-title">Negotiation &amp; Buying</div>
         <p class="approach-card-desc">Expert negotiation and buying of media inventory across all platforms, leveraging our industry relationships and volume buying power to ensure maximum ROI on every placement.</p>
       </div>
       <div class="approach-card reveal" style="transition-delay:0.15s">
-        <div class="approach-icon">📈</div>
+        <div class="approach-icon"><svg style="width:2rem;height:2rem;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="approach-card-title">Continuous Optimisation</div>
         <p class="approach-card-desc">Real-time monitoring and continuous optimisation of campaigns to ensure optimal performance and delivery — adjusting placements, frequency, and spend as results come in.</p>
       </div>
@@ -515,46 +521,28 @@
 
     <div class="benefits-grid">
       <div class="benefit-card reveal">
-        <div class="benefit-icon-wrap">💰</div>
+        <div class="benefit-icon-wrap"><svg style="width:60%;height:60%;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v9M9.3 9.6c0-1.2 1.2-2.1 2.7-2.1 1.7 0 2.7.9 2.7 1.9 0 2.8-5.4 1.4-5.4 4.2 0 1 1 1.9 2.7 1.9s2.7-.9 2.7-2" stroke-linecap="round"/></svg></div>
         <div class="benefit-title">Maximum ROI</div>
         <p class="benefit-desc">Expert negotiation and buying ensure optimal media pricing — so every rand works harder for your brand.</p>
       </div>
       <div class="benefit-card reveal" style="transition-delay:0.1s">
-        <div class="benefit-icon-wrap">👁️</div>
+        <div class="benefit-icon-wrap"><svg style="width:60%;height:60%;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.8"/></svg></div>
         <div class="benefit-title">Increased Brand Visibility</div>
         <p class="benefit-desc">Strategic media planning and buying drive maximum reach and frequency across your target audience.</p>
       </div>
       <div class="benefit-card reveal" style="transition-delay:0.2s">
-        <div class="benefit-icon-wrap">🎯</div>
+        <div class="benefit-icon-wrap"><svg style="width:60%;height:60%;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></div>
         <div class="benefit-title">Improved Campaign Effectiveness</div>
         <p class="benefit-desc">Continuous optimisation ensures campaigns hit their marks — with adjustments made in real time as data comes in.</p>
       </div>
       <div class="benefit-card reveal" style="transition-delay:0.3s">
-        <div class="benefit-icon-wrap">📋</div>
+        <div class="benefit-icon-wrap"><svg style="width:60%;height:60%;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="4.5" width="14" height="17" rx="1.5"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M8.5 12h7M8.5 15.5h7M8.5 8.5h3" stroke-linecap="round"/></svg></div>
         <div class="benefit-title">Transparency &amp; Accountability</div>
         <p class="benefit-desc">Regular reporting and detailed analysis provide clear insights into campaign performance at every stage.</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- STATS STRIP -->
-<div class="deal-strip">
-  <div class="deal-strip-inner">
-    <div class="deal-item">
-      <div class="deal-num">6,000+</div>
-      <div class="deal-label">Media Listings</div>
-    </div>
-    <div class="deal-item">
-      <div class="deal-num">5</div>
-      <div class="deal-label">Core Media Channels</div>
-    </div>
-    <div class="deal-item">
-      <div class="deal-num">200+</div>
-      <div class="deal-label">Brands Placed</div>
-    </div>
-  </div>
-</div>
 
 <!-- CTA -->
 <section class="cta-banner">
@@ -566,7 +554,15 @@
 
 <!-- FOOTER -->
 <footer class="oxfoot">
-  <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+  <div class="oxfoot-inner">
+    <span class="oxnav-word"><em>O</em>XYGENMEDIA</span>
+    <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
+    <div class="oxfoot-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
 </footer>
 
 <script>
